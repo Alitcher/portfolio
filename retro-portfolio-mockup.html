@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Alicia's Homepage!</title>
+<style>
+/* ============================================================
+   THEME TOKENS
+   ============================================================ */
+:root {
+    --bg: #C0C0C0;
+    --win-bg: #E8E8E8;
+    --titlebar: #000080;
+    --titlebar-text: #FFFFFF;
+    --border-light: #FFFFFF;
+    --border-dark: #404040;
+    --border-mid: #808080;
+    --link: #0000EE;
+    --text: #000000;
+    --font-ui: "Courier New", "Lucida Console", monospace;
+    --font-sans: Tahoma, Verdana, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { background: #808080; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.45;
+    max-width: 1500px;
+    margin: 0 auto;
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+}
+
+a { color: var(--link); }
+a:visited { color: #551A8B; }
+a:hover { color: #FF0000; }
+
+/* Old-school scrollbars (WebKit) */
+::-webkit-scrollbar { width: 16px; height: 16px; }
+::-webkit-scrollbar-track { background: repeating-conic-gradient(#fff 0% 25%, #C0C0C0 0% 50%) 50% / 2px 2px; }
+::-webkit-scrollbar-thumb {
+    background: #C0C0C0;
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+}
+
+/* ============================================================
+   BEVEL HELPERS
+   ============================================================ */
+.raised {
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+}
+.sunken {
+    border: 2px solid;
+    border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+}
+
+/* ============================================================
+   TOP TITLE BAR
+   ============================================================ */
+.app-titlebar {
+    background: var(--titlebar);
+    color: var(--titlebar-text);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 8px;
+    font-weight: bold;
+    font-size: 14px;
+}
+.app-titlebar .win-controls { display: flex; gap: 3px; }
+.win-btn {
+    width: 22px; height: 20px;
+    background: var(--bg);
+    color: #000;
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+}
+.win-btn:active { border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark); }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 20px;
+    background: var(--bg);
+    border-bottom: 2px solid;
+    border-color: var(--border-dark);
+    box-shadow: 0 2px 0 var(--border-light) inset;
+}
+.logo {
+    width: 90px; height: 90px;
+    flex-shrink: 0;
+    image-rendering: pixelated;
+}
+.site-title h1 {
+    font-family: var(--font-ui);
+    font-size: 52px;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+.site-title .roles {
+    margin-top: 6px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--link);
+}
+.site-title .roles .sep { color: var(--text); }
+.site-title .roles .accent { color: #CC5500; }
+
+.visitor-box {
+    margin-left: auto;
+    background: var(--win-bg);
+    padding: 12px 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+.visitor-box .label { font-weight: bold; margin-bottom: 8px; }
+.odometer { display: inline-flex; gap: 2px; padding: 4px; background: #404040; }
+.odometer span {
+    display: inline-block;
+    width: 22px;
+    padding: 3px 0;
+    background: #000;
+    color: #fff;
+    font-family: var(--font-ui);
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #666;
+}
+.odometer span:nth-child(odd) { background: #111; }
+.visitor-box .visitors-icon { font-size: 26px; vertical-align: middle; margin-left: 10px; }
+
+/* ============================================================
+   MAIN 3-COLUMN LAYOUT
+   ============================================================ */
+.layout {
+    display: grid;
+    grid-template-columns: 270px 1fr 330px;
+    gap: 10px;
+    padding: 10px;
+    align-items: start;
+}
+
+/* ============================================================
+   WINDOW COMPONENT
+   ============================================================ */
+.window {
+    background: var(--win-bg);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+    margin-bottom: 10px;
+}
+.window > .titlebar {
+    background: #C6C6C6;
+    border-bottom: 1px solid var(--border-mid);
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 13px;
+}
+.window > .titlebar .controls { display: flex; gap: 2px; }
+.window > .titlebar .controls .win-btn { width: 18px; height: 16px; font-size: 9px; }
+.window > .body { padding: 12px; }
+
+/* ============================================================
+   LEFT SIDEBAR
+   ============================================================ */
+.panel {
+    background: var(--bg);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+    padding: 12px;
+    margin-bottom: 10px;
+}
+.panel h2 {
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+.nav-list { list-style: none; }
+.nav-list li { display: flex; align-items: center; gap: 10px; padding: 6px 2px; }
+.nav-list .icon { width: 22px; text-align: center; font-size: 16px; flex-shrink: 0; }
+.nav-list a { font-weight: bold; }
+
+.sysinfo dt { float: left; clear: left; font-weight: bold; margin-right: 8px; }
+.sysinfo dd { margin-bottom: 6px; }
+
+.coffee-row { display: flex; align-items: center; gap: 8px; margin: 4px 0 8px; }
+.coffee-bar {
+    flex: 1;
+    height: 16px;
+    background: var(--win-bg);
+    padding: 2px;
+}
+.coffee-bar .fill {
+    height: 100%;
+    width: 75%;
+    background: repeating-linear-gradient(to right, #000080 0 12px, #ECE9D8 12px 15px);
+}
+
+.status-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #00A800;
+    box-shadow: 0 0 3px #00FF00;
+    animation: blink 1.4s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0.25; } }
+
+/* ============================================================
+   WELCOME WINDOW
+   ============================================================ */
+.welcome-body { display: flex; gap: 16px; }
+.welcome-text { flex: 1; }
+.welcome-text h3 { font-size: 26px; margin-bottom: 10px; }
+.welcome-text ul { margin: 8px 0 0 24px; }
+.welcome-side { width: 190px; flex-shrink: 0; text-align: center; }
+.welcome-side .pc-art { font-size: 96px; line-height: 1; filter: grayscale(0.2); }
+.powered-badge {
+    margin-top: 10px;
+    background: var(--win-bg);
+    padding: 8px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+/* ============================================================
+   FEATURED PROJECTS
+   ============================================================ */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+.project-card .thumb {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 0 #000;
+    image-rendering: pixelated;
+}
+.thumb-aistart { background: linear-gradient(180deg, #0b1c3d 0%, #123061 60%, #1c4e9c 100%); color: #6FEFFF; }
+.thumb-factory { background: linear-gradient(180deg, #8c7b52 0%, #a6905c 50%, #6e6248 100%); }
+.thumb-map     { background: linear-gradient(135deg, #cfe3c2 0%, #b9d7e8 55%, #e8e3c9 100%); color: #C22; }
+.thumb-dragon  { background: radial-gradient(circle at 40% 35%, #6b6b6b 0%, #2e2e2e 70%, #111 100%); }
+.project-card h4 { margin: 8px 0 4px; }
+.project-card h4 a { text-decoration: underline; font-size: 15px; }
+.project-card p { font-size: 12.5px; margin-bottom: 6px; }
+.project-card .details { font-weight: bold; }
+
+/* ============================================================
+   AI ASSISTANT
+   ============================================================ */
+.ai-body { display: flex; gap: 16px; align-items: flex-start; }
+.ai-left { width: 170px; flex-shrink: 0; text-align: left; }
+.ai-left .robot { font-size: 64px; line-height: 1; }
+.ai-left .ai-name { font-weight: bold; color: var(--link); margin-top: 6px; }
+.ai-left .ai-desc { font-size: 12.5px; margin: 4px 0; }
+.ai-online { font-weight: bold; color: #007700; font-size: 12.5px; }
+.ai-online::before {
+    content: "";
+    display: inline-block;
+    width: 9px; height: 9px;
+    background: #00A800;
+    margin-right: 6px;
+    animation: blink 1.4s steps(1) infinite;
+}
+.ai-right { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.chat-log {
+    background: #fff;
+    min-height: 70px;
+    max-height: 220px;
+    overflow-y: auto;
+    padding: 10px;
+    font-size: 13px;
+}
+.chat-log .msg { margin-bottom: 8px; }
+.chat-log .who-ai { color: var(--link); font-weight: bold; }
+.chat-log .who-user { color: #AA0000; font-weight: bold; }
+.chat-log .dialup { color: #555; font-style: italic; }
+.chat-input-row { display: flex; gap: 8px; }
+.chat-input-row input {
+    flex: 1;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    padding: 8px;
+    background: #fff;
+    border: 2px solid;
+    border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+    outline: none;
+}
+.btn {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 7px 20px;
+    background: var(--bg);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+    cursor: pointer;
+}
+.btn:active { border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark); }
+.btn:focus-visible { outline: 1px dotted #000; outline-offset: -5px; }
+
+/* ============================================================
+   RIGHT COLUMN
+   ============================================================ */
+.blog-list { list-style: none; }
+.blog-list li { display: flex; gap: 10px; margin-bottom: 12px; }
+.blog-list .icon { font-size: 18px; flex-shrink: 0; }
+.blog-list .date { font-size: 12px; color: #333; }
+.more-posts { font-weight: bold; }
+
+.stack-list { list-style: none; }
+.stack-list li { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+.stack-list .chip {
+    width: 22px; height: 22px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    color: #fff;
+    font-family: var(--font-sans);
+}
+.chip-unity { background: #222; }
+.chip-cpp { background: #00427E; border-radius: 50%; }
+.chip-gl { background: #4A6; border-radius: 50%; }
+.chip-ts { background: #2F74C0; }
+.chip-db { background: #666; }
+.chip-docker { background: #1D91C9; border-radius: 4px; }
+
+.links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.link-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: var(--bg);
+    border: 2px solid;
+    border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--text) !important;
+    font-size: 13px;
+}
+.link-btn:active { border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark); }
+.link-btn .lb-icon {
+    width: 20px; height: 20px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: bold;
+}
+.lb-gh { background: #000; border-radius: 50%; }
+.lb-in { background: #0A66C2; }
+.lb-pdf { background: #C00; }
+.lb-mail { background: #DCDCDC; border: 1px solid #888; color: #000 !important; }
+
+.badges { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.badge88 {
+    width: 110px; height: 34px;
+    display: flex;
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: bold;
+    border: 1px solid #000;
+    image-rendering: pixelated;
+}
+.badge88 .b-left {
+    background: #F60;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    width: 34px;
+    font-size: 14px;
+}
+.badge88 .b-right {
+    flex: 1;
+    background: #000;
+    color: #fff;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    line-height: 1.2;
+}
+.badge-w3c .b-left { background: #005A9C; }
+.badge-w3c .b-right { background: #FFB; color: #005A9C; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 16px;
+    background: var(--bg);
+    border-top: 2px solid var(--border-light);
+    box-shadow: 0 -2px 0 var(--border-mid);
+    font-size: 13px;
+}
+.site-footer .heart { color: #E0218A; }
+
+/* ============================================================
+   RESPONSIVE (stack windows, keep the retro look)
+   ============================================================ */
+@media (max-width: 1100px) {
+    .layout { grid-template-columns: 1fr; }
+    /* Split the left sidebar so its panels can be ordered independently */
+    .sidebar-left { display: contents; }
+    /* Stack order: navigation > main content (Welcome first) > system info > right column */
+    .nav-panel { order: 0; margin-bottom: 0; }
+    .layout > main { order: 1; }
+    .sysinfo-panel { order: 2; margin-bottom: 0; }
+    .layout > .sidebar-right { order: 3; }
+    /* Navigation becomes a compact horizontal bar on mobile */
+    .nav-panel h2 { margin-bottom: 6px; }
+    .nav-panel .nav-list { display: flex; flex-wrap: wrap; gap: 2px 18px; }
+    .nav-panel .nav-list li { padding: 3px 0; gap: 6px; }
+    .site-header { flex-wrap: wrap; }
+    .visitor-box { margin-left: 0; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    .welcome-body, .ai-body { flex-direction: column; }
+    .welcome-side, .ai-left { width: auto; }
+}
+@media (max-width: 560px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .site-title h1 { font-size: 34px; }
+    .site-title .roles { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .status-dot, .ai-online::before { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== TOP TITLE BAR ===================== -->
+<div class="app-titlebar">
+    <span>Welcome to Alicia's Homepage!</span>
+    <span style="display:flex; align-items:center; gap:14px;">
+        <span id="clock">Monday, June 30, 2026 - 22:18:45</span>
+        <span class="win-controls">
+            <button class="win-btn" aria-label="Minimize">_</button>
+            <button class="win-btn" aria-label="Maximize">&#9633;</button>
+            <button class="win-btn" aria-label="Close">X</button>
+        </span>
+    </span>
+</div>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header">
+    <svg class="logo" viewBox="0 0 90 90" aria-hidden="true">
+        <!-- pixel-ish cube + axis logo placeholder -->
+        <g stroke="#000" stroke-width="2" fill="#B0B0B0">
+            <rect x="14" y="18" width="26" height="26"/>
+            <polygon points="14,18 24,8 50,8 40,18" fill="#D8D8D8"/>
+            <polygon points="40,18 50,8 50,34 40,44" fill="#888"/>
+        </g>
+        <line x1="58" y1="6" x2="58" y2="74" stroke="#0A0" stroke-width="3"/>
+        <line x1="6" y1="74" x2="84" y2="74" stroke="#00F" stroke-width="3"/>
+        <line x1="58" y1="74" x2="80" y2="52" stroke="#F00" stroke-width="3"/>
+    </svg>
+    <div class="site-title">
+        <h1>Alicia Sudlerd</h1>
+        <div class="roles">
+            Unity XR Developer <span class="sep">|</span>
+            Backend Developer <span class="sep">|</span>
+            <span class="accent">Computer Graphics Enthusiast</span>
+        </div>
+    </div>
+    <div class="visitor-box raised">
+        <div class="label">You are visitor number:</div>
+        <span class="odometer" id="visitorCounter">
+            <span>0</span><span>0</span><span>1</span><span>2</span><span>4</span><span>3</span>
+        </span>
+        <span class="visitors-icon">&#128101;</span>
+    </div>
+</header>
+
+<!-- ===================== MAIN LAYOUT ===================== -->
+<div class="layout">
+
+    <!-- ============ LEFT SIDEBAR ============ -->
+    <aside class="sidebar-left">
+        <nav class="panel nav-panel" aria-label="Main navigation">
+            <h2>:: NAVIGATION ::</h2>
+            <ul class="nav-list">
+                <li><span class="icon">&#127968;</span><a href="#">Home</a></li>
+                <li><span class="icon">&#128193;</span><a href="#">Projects</a></li>
+                <li><span class="icon">&#129405;</span><a href="#">XR Development</a></li>
+                <li><span class="icon">&#128421;</span><a href="#">Backend</a></li>
+                <li><span class="icon">&#127912;</span><a href="#">Computer Graphics</a></li>
+                <li><span class="icon">&#128221;</span><a href="#">Blog / Notes</a></li>
+                <li><span class="icon">&#128196;</span><a href="#">Resume</a></li>
+                <li><span class="icon">&#9993;</span><a href="#">Contact Me</a></li>
+                <li><span class="icon">&#128213;</span><a href="#">Guestbook</a></li>
+            </ul>
+        </nav>
+
+        <section class="panel sysinfo-panel">
+            <h2>:: SYSTEM INFO ::</h2>
+            <dl class="sysinfo">
+                <dt>OS:</dt><dd>Windows 11</dd>
+                <dt>Editor:</dt><dd>Rider</dd>
+                <dt>Engine:</dt><dd>Unity 2022.3 LTS</dd>
+                <dt>Language:</dt><dd>C#, C++, TS</dd>
+            </dl>
+            <div>Coffee Level:</div>
+            <div class="coffee-row">
+                <span>&#9749;</span>
+                <div class="coffee-bar sunken"><div class="fill"></div></div>
+                <span>75%</span>
+            </div>
+            <div style="margin-bottom:10px;">Status: <span class="status-dot" aria-hidden="true"></span> Coding...</div>
+            <div>Now Playing:</div>
+            <div style="margin:2px 0 12px;"><a href="#">BEHM - Riipun</a></div>
+            <div><a href="#">View Source</a></div>
+        </section>
+    </aside>
+
+    <!-- ============ CENTER COLUMN ============ -->
+    <main>
+        <!-- WELCOME -->
+        <section class="window">
+            <div class="titlebar">
+                <span>:: WELCOME ::</span>
+                <span class="controls">
+                    <button class="win-btn" aria-label="Restore">&#8599;</button>
+                    <button class="win-btn" aria-label="Close">X</button>
+                </span>
+            </div>
+            <div class="body welcome-body">
+                <div class="welcome-text">
+                    <h3>Hello! &#128075;</h3>
+                    <p>I'm Alicia, a developer who loves building interactive experiences, tools and systems.</p>
+                    <p>I work with Unity for XR, build backend services, and explore the world of computer graphics.</p>
+                    <p style="margin-top:12px;">Currently focusing on:</p>
+                    <ul>
+                        <li>Unity XR development (VR / AR / MR)</li>
+                        <li>Backend systems &amp; distributed architecture</li>
+                        <li>Real-time rendering &amp; graphics programming</li>
+                    </ul>
+                </div>
+                <div class="welcome-side">
+                    <div class="pc-art" aria-hidden="true">&#128421;&#65039;</div>
+                    <div class="powered-badge raised">Powered by<br>&#9749; &amp; Curiosity</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED PROJECTS -->
+        <section class="window">
+            <div class="titlebar"><span>:: FEATURED PROJECTS ::</span></div>
+            <div class="body">
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="thumb thumb-aistart sunken">AI START</div>
+                        <h4><a href="#">AIStart</a></h4>
+                        <p>XR education platform about AI &amp; drone delivery. Built with Unity XR.</p>
+                        <a class="details" href="#">Details &raquo;</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="thumb thumb-factory sunken">VR FACTORY</div>
+                        <h4><a href="#">VR Factory</a></h4>
+                        <p>VR training simulation for factory layout &amp; safety. Multi-platform with XR.</p>
+                        <a class="details" href="#">Details &raquo;</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="thumb thumb-map sunken">&#128205; MAP</div>
+                        <h4><a href="#">Cosplay Event Map</a></h4>
+                        <p>Web map for anime &amp; cosplay events in Nordic &amp; Baltic.</p>
+                        <a class="details" href="#">Details &raquo;</a>
+                    </div>
+                    <div class="project-card">
+                        <div class="thumb thumb-dragon sunken">&#128009; GL</div>
+                        <h4><a href="#">OpenGL Renderer</a></h4>
+                        <p>Personal rendering engine in C++ &amp; OpenGL. Deferred shading, PBR.</p>
+                        <a class="details" href="#">Details &raquo;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI ASSISTANT -->
+        <section class="window">
+            <div class="titlebar">
+                <span>:: AI ASSISTANT ::</span>
+                <span class="controls"><button class="win-btn" aria-label="Close">X</button></span>
+            </div>
+            <div class="body ai-body">
+                <div class="ai-left">
+                    <div class="robot" aria-hidden="true">&#129302;</div>
+                    <div class="ai-name">AliciaAI</div>
+                    <div class="ai-desc">Your personal dev assistant<br>Ask me anything!</div>
+                    <div class="ai-online">ONLINE</div>
+                </div>
+                <div class="ai-right">
+                    <div class="chat-log sunken" id="chatLog" aria-live="polite">
+                        <div class="msg"><span class="who-ai">AliciaAI:</span> Hello! I can help you learn more about my work, skills, or projects. What would you like to know?</div>
+                    </div>
+                    <div class="chat-input-row">
+                        <input type="text" id="chatInput" placeholder="Type your question here..." aria-label="Ask AliciaAI">
+                        <button class="btn" id="sendBtn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============ RIGHT COLUMN ============ -->
+    <aside class="sidebar-right">
+        <section class="window">
+            <div class="titlebar">
+                <span>:: LATEST BLOG POSTS ::</span>
+                <span class="controls">
+                    <button class="win-btn" aria-label="Restore">&#8599;</button>
+                    <button class="win-btn" aria-label="Close">X</button>
+                </span>
+            </div>
+            <div class="body">
+                <ul class="blog-list">
+                    <li><span class="icon">&#128196;</span><span><a href="#">Building Responsive XR UI</a><br><span class="date">June 24, 2026</span></span></li>
+                    <li><span class="icon">&#128196;</span><span><a href="#">Convai NPC Architecture</a><br><span class="date">June 18, 2026</span></span></li>
+                    <li><span class="icon">&#128196;</span><span><a href="#">Why I Love Computer Graphics</a><br><span class="date">June 10, 2026</span></span></li>
+                    <li><span class="icon">&#128196;</span><span><a href="#">Backend Scalability Notes</a><br><span class="date">June 2, 2026</span></span></li>
+                </ul>
+                <a class="more-posts" href="#">&raquo; More posts...</a>
+            </div>
+        </section>
+
+        <section class="window">
+            <div class="titlebar"><span>:: TECH STACK ::</span></div>
+            <div class="body">
+                <ul class="stack-list">
+                    <li><span class="chip chip-unity">U</span> Unity, C#</li>
+                    <li><span class="chip chip-cpp">C+</span> C++</li>
+                    <li><span class="chip chip-gl">GL</span> OpenGL / Vulkan</li>
+                    <li><span class="chip chip-ts">TS</span> TypeScript, Node.js</li>
+                    <li><span class="chip chip-db">DB</span> PostgreSQL, RabbitMQ</li>
+                    <li><span class="chip chip-docker">&#128051;</span> Docker, Linux</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>:: LINKS ::</h2>
+            <div class="links-grid">
+                <a class="link-btn" href="#"><span class="lb-icon lb-gh">GH</span> GitHub</a>
+                <a class="link-btn" href="#"><span class="lb-icon lb-in">in</span> LinkedIn</a>
+                <a class="link-btn" href="#"><span class="lb-icon lb-pdf">R</span> Resume (PDF)</a>
+                <a class="link-btn" href="#"><span class="lb-icon lb-mail">&#9993;</span> Email Me</a>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>:: MISC ::</h2>
+            <p>Best viewed in:<br>1024 x 768 or higher</p>
+            <div class="badges">
+                <div class="badge88">
+                    <div class="b-left">5</div>
+                    <div class="b-right"><span>Made with</span><span>HTML!</span></div>
+                </div>
+                <div class="badge88 badge-w3c">
+                    <div class="b-left">W3C</div>
+                    <div class="b-right"><span>CSS &#10003;</span></div>
+                </div>
+            </div>
+        </section>
+    </aside>
+</div>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+    <span>Last Updated: June 30, 2026</span>
+    <span>&copy; 2026 Alicia Sudlerd. All rights reserved.</span>
+    <span>Thanks for visiting! <span class="heart">&#10084;</span></span>
+</footer>
+
+<script>
+// Live clock in the title bar
+function updateClock() {
+    var now = new Date();
+    var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    function pad(n) { return n < 10 ? "0" + n : n; }
+    var text = days[now.getDay()] + ", " + months[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear() + " - " + pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
+    document.getElementById("clock").textContent = text;
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// Fake AI chat with a dial-up style loading animation (mockup only)
+var chatLog = document.getElementById("chatLog");
+var chatInput = document.getElementById("chatInput");
+var sendBtn = document.getElementById("sendBtn");
+var replies = [
+    "Alicia is a Unity XR developer working with Quest 3, OpenXR and the XR Interaction Toolkit.",
+    "On the backend side: ASP.NET Core, RabbitMQ, PostgreSQL, Docker and gRPC.",
+    "Her OpenGL renderer features deferred shading, shadow mapping, PBR, SSAO and bloom.",
+    "Check the Projects page for AIStart, VR Factory, Cosplay Event Map and the OpenGL Renderer."
+];
+var replyIndex = 0;
+
+function appendMsg(html) {
+    var div = document.createElement("div");
+    div.className = "msg";
+    div.innerHTML = html;
+    chatLog.appendChild(div);
+    chatLog.scrollTop = chatLog.scrollHeight;
+    return div;
+}
+
+function sendMessage() {
+    var text = chatInput.value.trim();
+    if (text === "") return;
+    chatInput.value = "";
+    appendMsg('<span class="who-user">You:</span> ' + text.replace(/</g, "&lt;"));
+    var loader = appendMsg('<span class="dialup">Connecting to AliciaAI... &#9608;</span>');
+    var frames = ["&#9608;", "&#9608;&#9608;", "&#9608;&#9608;&#9608;", "&#9608;&#9608;&#9608;&#9608;"];
+    var frame = 0;
+    var anim = setInterval(function() {
+        frame = (frame + 1) % frames.length;
+        loader.innerHTML = '<span class="dialup">Connecting to AliciaAI... ' + frames[frame] + '</span>';
+    }, 250);
+    setTimeout(function() {
+        clearInterval(anim);
+        loader.innerHTML = '<span class="who-ai">AliciaAI:</span> ' + replies[replyIndex % replies.length];
+        replyIndex++;
+        chatLog.scrollTop = chatLog.scrollHeight;
+    }, 1800);
+}
+
+sendBtn.addEventListener("click", sendMessage);
+chatInput.addEventListener("keydown", function(e) { if (e.key === "Enter") sendMessage(); });
+</script>
+
+</body>
+</html>

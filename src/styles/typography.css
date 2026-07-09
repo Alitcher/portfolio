@@ -1,0 +1,68 @@
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3, h4 {
+  font-family: var(--font-ui);
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+h4 {
+  font-size: 15px;
+}
+
+p {
+  margin-bottom: 8px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+code {
+  font-family: var(--font-mono);
+  background: #fff;
+  border: 1px solid var(--border-mid);
+  padding: 0 3px;
+}
+
+blockquote {
+  border-left: 4px solid var(--titlebar);
+  background: #fff;
+  padding: 8px 12px;
+  margin: 10px 0;
+  font-style: italic;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border-mid);
+  border-bottom: 1px solid var(--border-light);
+  margin: 12px 0;
+}
+
+/* Blinking status light shared across the site */
+.status-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00a800;
+  box-shadow: 0 0 3px #00ff00;
+  animation: blink 1.4s steps(1) infinite;
+  vertical-align: middle;
+}
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .status-dot,
+  .ai-online::before {
+    animation: none;
+  }
+}

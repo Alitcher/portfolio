@@ -1,0 +1,83 @@
+/* ============================================================
+   THEME TOKENS + BASE RESET
+   Windows 98 / 2000 / XP palette per the specification.
+   ============================================================ */
+:root {
+  --bg: #c0c0c0;
+  --win-bg: #ece9d8;
+  --win-bg-alt: #e8e8e8;
+  --titlebar: #000080;
+  --titlebar-text: #ffffff;
+  --border-light: #ffffff;
+  --border-dark: #404040;
+  --border-mid: #808080;
+  --link: #0000ee;
+  --link-visited: #551a8b;
+  --link-hover: #ff0000;
+  --text: #000000;
+
+  --font-ui: "Courier New", "Lucida Console", monospace;
+  --font-sans: Tahoma, Verdana, sans-serif;
+  --font-mono: "Courier New", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: #808080;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.45;
+  max-width: 1500px;
+  margin: 0 auto;
+  border: 2px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+  min-height: 100vh;
+}
+
+a {
+  color: var(--link);
+}
+a:visited {
+  color: var(--link-visited);
+}
+a:hover {
+  color: var(--link-hover);
+}
+
+/* Old-school scrollbars (WebKit / Chromium) */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+::-webkit-scrollbar-track {
+  background: repeating-conic-gradient(#fff 0% 25%, #c0c0c0 0% 50%) 50% / 2px 2px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+}
+
+/* Bevel helpers */
+.raised {
+  border: 2px solid;
+  border-color: var(--border-light) var(--border-dark) var(--border-dark) var(--border-light);
+}
+.sunken {
+  border: 2px solid;
+  border-color: var(--border-dark) var(--border-light) var(--border-light) var(--border-dark);
+}
+
+.muted {
+  color: #555;
+}
