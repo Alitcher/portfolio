@@ -8,8 +8,8 @@ export const RESUME: Resume = {
       org: "University of Tartu, Estonia",
       period: "2022 - 2024",
       points: [
-        "Focus on software engineering, real-time graphics and distributed systems.",
-        "Thesis on XR interaction design for training applications.",
+        "Specialized in distributed systems, DevOps, Cloud Computing, and Computer Graphics.",
+        "Completed projects involving NPR integration, networking, Computer Graphic Projects, and Algorithmics.",
       ],
     },
     {
@@ -17,20 +17,22 @@ export const RESUME: Resume = {
       org: "Thammasat University, Thailand",
       period: "2015 - 2019",
       points: [
-        "Focus on software engineering, real-time graphics and distributed systems.",
-        "Thesis on XR interaction design for training applications.",
+        "Studied game design and development, 3D modeling, UI&UX design, and game theory.",
+        "Focused on Unity game development and board game designs.",
       ],
     },
   ],
   experience: [
     {
       title: "XR Developer Lead (Full-time)",
-      org: "Helsinki XR Center",
+      org: "Helsinki XR Center (HXRC)",
       period: "2025 - Present",
       points: [
-        "Built VR training and education applications for Meta Quest and PCVR.",
-        "Owned the cross-device interaction layer on top of the XR Interaction Toolkit.",
-        "Profiled and optimised scenes to hold a stable 72–90 Hz on standalone headsets.",
+        "Develop XR research and development projects involving GIS visualization and digital twins.",
+        "Design scalable technical architecture and reusable software components across multiple projects.",
+        "Build data pipelines and transformation workflows for geospatial datasets.",
+        "Lead junior developers and coordinate technical tasks across simultaneous projects.",
+        "Collaborate with partner companies from planning through delivery.",
       ],
     },
     {
@@ -38,32 +40,309 @@ export const RESUME: Resume = {
       org: "Wildchain",
       period: "Jan 2022 - Oct 2022",
       points: [
-        "Developed ASP.NET Core services with RabbitMQ messaging and PostgreSQL.",
-        "Containerised services with Docker for reproducible deployments.",
-        "Wrote gRPC contracts for low-latency inter-service calls.",
+        "Developed authentication features together with backend engineers.",
+        "Designed UI architecture and implemented gameplay interfaces in Unity.",
+        "Integrated REST APIs into game systems using UniRx.",
+        "Collaborated with designers to implement gameplay features and polish production builds.",
       ],
     },
-        {
+    {
       title: "Unity3D Developer | Music Ed-tech",
       org: "BNK Musicmall Co.,Ltd",
       period: "Jun 2021 - Dec 2021",
       points: [
-        "Developed ASP.NET Core services with RabbitMQ messaging and PostgreSQL.",
-        "Containerised services with Docker for reproducible deployments.",
-        "Wrote gRPC contracts for low-latency inter-service calls.",
+        "Integrated MIDI keyboards with Unity using the MIDI Unified plugin.",
+        "Implemented gameplay systems and maintained project architecture.",
+        "Built responsive UI prefabs and gameplay visualizations.",
+        "Worked closely with senior developers using UML-driven development.",
+      ],
+    },
+    {
+      title: "Unity3D Developer",
+      org: "Electronic Extreme (Ragnarok: Battle Academy)",
+      period: "Jan 2020 - May 2021",
+      points: [
+        "Developed inventory, shop, and authentication systems.",
+        "Managed 3D asset pipelines and Unity Editor workflows.",
+        "Integrated Firebase services into production systems.",
+        "Collaborated with artists to deliver production-ready UI.",
+      ],
+    },
+    {
+      title: "UE5 Integration Engineer (Intern)",
+      org: "Artineering",
+      period: "Mar 2024 - May 2024",
+      points: [
+        "Ported internal tools to Unreal Engine 5 using C++.",
+        "Implemented stylized HLSL shaders.",
+        "Produced technical documentation for the new architecture.",
+      ],
+    },
+    {
+      title: "C++ & Linux Administration (Intern)",
+      org: "Leil Storage (SaunaFS / LizardFS)",
+      period: "Jul 2023 - Aug 2023",
+      points: [
+        "Containerized distributed filesystem services using Docker.",
+        "Automated Debian package generation with Bash.",
+        "Worked with RPC communication, integration testing, and Linux server administration.",
       ],
     },
   ],
+
+  projects: [
+    {
+      title: "CosoraAtlas",
+      technologies: [
+        "Next.js 16 / React 19",
+        "TypeScript",
+        "MapLibre GL",
+        "Cloudflare Workers + D1",
+        "Kartta Helsinki (GIS)",
+      ],
+      points: [
+        "Personal cosplay hub that maps cosplay-friendly shoot locations and spots around Helsinki (future will expand to Nordics and Baltics).",
+        "Full-stack interactive GIS map - anime conventions plus cosplay-friendly cafés, studios and photo spots with pictures and themes.",
+        "Modeled events and places behind a shared, Zod-validated data contract, persisted in D1 (SQLite) with CRUD, public read APIs, community submissions and admin auth.",
+        "Proxied and cached official venue geometry from Helsinki's Kartta Helsinki (hel.kartta.fi) service; map tiles via MapLibre (OpenStreetMap data), no API keys.",
+      ],
+      links: [
+        {
+          name: "Visit Website",
+          url: "https://cosoraatlas.vercel.app/",
+        },
+        {
+          name: "Video",
+          url: "https://youtube.com/...",
+        },
+        {
+          name: "Blog",
+          url: "https://medium.com/...",
+        },
+      ],
+    },
+    {
+      title: "AAXLP VR Factory Simulation",
+      technologies: [
+        "Unity",
+        "C#",
+        "Meta Quest",
+        "VIROO",
+        "JSON",
+      ],
+      points: [
+        "Developed runtime workstation systems and VR factory interactions.",
+        "Designed JSON-based persistence architecture.",
+        "Integrated the application into the VIROO cloud platform.",
+      ],
+      links: [
+        {
+          name: "Showcase",
+          url: "https://example.com/showcase",
+        },
+        {
+          name: "Video",
+          url: "https://youtube.com/...",
+        },
+        {
+          name: "Blog",
+          url: "https://medium.com/...",
+        },
+      ],
+    },
+    {
+      title: "ENPA (City Data Integration)",
+      technologies: [
+        "React",
+        "Mapbox",
+        "WebGL",
+        "REST API",
+        "GIS",
+      ],
+      points: [
+        "Evaluate the technical approach for GIS development and continuation and evaluated suitable visualization frameworks.",
+        "Reviewed code and mentored trainee developer throughout development.",
+        "Implemented prototype components for energy data visualization and integration testing.",
+      ],
+      links: [
+        {
+          name: "Showcase",
+          url: "https://xrdev.edu.metropolia.fi/kaupunkidata/",
+        },
+        {
+          name: "Video",
+          url: "https://youtube.com/...",
+        },
+        {
+          name: "Blog",
+          url: "https://helsinkixrcenter.com/news/hxrc-team-data-visualisation-in-urban-setting-part-2-leppavaara-expansion/",
+        },
+      ],
+    },
+    {
+      title: "Metadata to Metaverse",
+      technologies: [
+        "Unity",
+        "Mapbox",
+        "Meta Quest 3",
+        "C#",
+        "Geocoding",
+      ],
+      points: [
+        "Developed 3D city visualization for Meta Quest using Mapbox.",
+        "Integrated geospatial data with in-house infrastructure and geocoding services.",
+      ],
+      links: [
+        {
+          name: "Showcase",
+          url: "https://example.com/showcase",
+        },
+        {
+          name: "Video",
+          url: "https://youtube.com/...",
+        },
+        {
+          name: "Blog",
+          url: "https://medium.com/...",
+        },
+      ],
+    },
+    {
+      title: "Virtual Learning Platform (VLL)",
+      technologies: [
+        "NestJS",
+        "Unity",
+        "Photon Fusion",
+        "Convai",
+        "TypeScript",
+        "C#",
+      ],
+      points: [
+        "Developed backend services with NestJS and shared SDKs.",
+        "Implemented classroom systems, Photon Fusion multiplayer, and AI-driven NPC interactions.",
+        "Integrated Convai dialogue with finite state machines.",
+      ],
+      links: [
+        {
+          name: "Showcase",
+          url: "https://example.com/showcase",
+        },
+        {
+          name: "Video",
+          url: "https://youtube.com/...",
+        },
+        {
+          name: "Blog",
+          url: "https://medium.com/...",
+        },
+      ],
+    },
+  ],
+
   skills: [
-    { name: "XR / Game", items: ["Unity", "C#", "OpenXR", "XR Interaction Toolkit", "Meta Quest"] },
-    { name: "Graphics", items: ["C++", "OpenGL", "GLSL", "Deferred rendering", "PBR", "RenderDoc"] },
-    { name: "Backend", items: ["ASP.NET Core", "RabbitMQ", "gRPC", "PostgreSQL", "Docker"] },
-    { name: "Web / Tooling", items: ["TypeScript", "Vite", "Node.js", "Git", "Linux"] },
+    {
+      name: "Programming Languages",
+      items: [
+        "C#",
+        "C++",
+        "TypeScript",
+        "Python",
+        "JavaScript",
+        "Bash",
+      ],
+    },
+    {
+      name: "XR & Game Development",
+      items: [
+        "Unity",
+        "OpenXR",
+        "XR Interaction Toolkit",
+        "Photon Fusion",
+        "Meta Quest",
+        "Unreal Engine 5",
+      ],
+    },
+    {
+      name: "Backend",
+      items: [
+        "NestJS",
+        "FastAPI",
+        "Flask",
+        "REST API",
+        "JSON",
+        "gRPC",
+      ],
+    },
+    {
+      name: "GIS & Data",
+      items: [
+        "Mapbox",
+        "Digital Twin",
+        "Geospatial Data",
+        "Data Pipelines",
+        "ETL",
+      ],
+    },
+    {
+      name: "Databases",
+      items: [
+        "PostgreSQL",
+        "MySQL",
+      ],
+    },
+    {
+      name: "Frontend",
+      items: [
+        "React",
+        "Vue",
+        "UniRx",
+      ],
+    },
+    {
+      name: "DevOps",
+      items: [
+        "Docker",
+        "Docker Compose",
+        "Linux",
+        "GitHub Actions",
+        "GitLab CI",
+        "Kubernetes",
+      ],
+    },
+    {
+      name: "Graphics",
+      items: [
+        "OpenGL",
+        "GLSL",
+        "HLSL",
+        "Computer Graphics",
+      ],
+    },
+    {
+      name: "AI",
+      items: [
+        "ChatGPT",
+        "Convai",
+        "Prompt Engineering",
+        "LLM Integration",
+      ],
+    },
   ],
+
   languages: [
-    { name: "Finnish", level: "Native" },
-    { name: "English", level: "Fluent" },
-    { name: "Swedish", level: "Intermediate" },
+    {
+      name: "English",
+      level: "C2 (Native)",
+    },
+    {
+      name: "Finnish",
+      level: "B1",
+    },
+    {
+      name: "Estonian",
+      level: "A1",
+    },
   ],
+
   pdfUrl: "./assets/resume.pdf",
 };

@@ -5,6 +5,26 @@ import type { Project } from "../../types.js";
  * of `GET /api/projects` must return objects matching the `Project` type.
  */
 export const PROJECTS: readonly Project[] = [
+    {
+    slug: "cosplay-event-map",
+    title: "CosoraAtlas",
+    category: "gis",
+    summary: "Web map for anime & cosplay events across the Nordics & Baltics.",
+    overview:
+      "An interactive web map that aggregates anime, manga and cosplay events across the " +
+      "Nordic and Baltic region. Users filter by date, category and country, and event " +
+      "organisers submit new entries through a moderated pipeline.",
+    tech: ["TypeScript", "Leaflet", "PostGIS", "ASP.NET Core", "PostgreSQL"],
+    lessons: [
+      "Modelling geospatial data cleanly with PostGIS.",
+      "Clustering hundreds of markers without janky panning.",
+      "Building a lightweight moderation workflow for submissions.",
+    ],
+    links: { github: "https://github.com/Alitcher/CosGisClient", demo: "" },
+    featured: true,
+    thumbTheme: "map",
+    thumbLabel: "&#128205; MAP",
+  },
   {
     slug: "aistart",
     title: "AIStart",
@@ -46,26 +66,7 @@ export const PROJECTS: readonly Project[] = [
     thumbTheme: "factory",
     thumbLabel: "VR FACTORY",
   },
-  {
-    slug: "cosplay-event-map",
-    title: "Cosplay Event Map",
-    category: "gis",
-    summary: "Web map for anime & cosplay events across the Nordics & Baltics.",
-    overview:
-      "An interactive web map that aggregates anime, manga and cosplay events across the " +
-      "Nordic and Baltic region. Users filter by date, category and country, and event " +
-      "organisers submit new entries through a moderated pipeline.",
-    tech: ["TypeScript", "Leaflet", "PostGIS", "ASP.NET Core", "PostgreSQL"],
-    lessons: [
-      "Modelling geospatial data cleanly with PostGIS.",
-      "Clustering hundreds of markers without janky panning.",
-      "Building a lightweight moderation workflow for submissions.",
-    ],
-    links: { github: "https://github.com/", demo: "" },
-    featured: true,
-    thumbTheme: "map",
-    thumbLabel: "&#128205; MAP",
-  },
+
   {
     slug: "opengl-renderer",
     title: "OpenGL Renderer",

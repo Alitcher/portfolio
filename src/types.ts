@@ -51,6 +51,18 @@ export interface ResumeEntry {
   readonly points: readonly string[];
 }
 
+export interface ResumeProject {
+  readonly title: string;
+  readonly technologies: readonly string[];
+  readonly points: readonly string[];
+  readonly links: readonly ResumeProjectLink[];
+}
+
+export interface ResumeProjectLink {
+  readonly name: string;
+  readonly url: string;
+}
+
 export interface SkillGroup {
   readonly name: string;
   readonly items: readonly string[];
@@ -64,6 +76,7 @@ export interface LanguageSkill {
 export interface Resume {
   readonly education: readonly ResumeEntry[];
   readonly experience: readonly ResumeEntry[];
+  readonly projects: readonly ResumeProject[];
   readonly skills: readonly SkillGroup[];
   readonly languages: readonly LanguageSkill[];
   readonly pdfUrl: string;

@@ -87,6 +87,22 @@
 .detail-links .link-btn {
   width: auto;
 }
+/* ---- Project links ---- */
+.project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 6px 0 10px;
+}
+
+.project-link {
+    text-decoration: none;
+    color: var(--link-color, #00f);
+}
+
+.project-link:hover {
+    text-decoration: underline;
+}
 
 /* ---- Computer graphics page ---- */
 .crt-hint {

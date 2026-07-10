@@ -3,7 +3,7 @@ import { windowEl } from "../components/window.js";
 import { pageRegion } from "./shared.js";
 import { api } from "../services/api.js";
 import { config } from "../config.js";
-import type { ResumeEntry } from "../types.js";
+import type { ResumeEntry, ResumeProject } from "../types.js";
 
 /** Resume page: education, experience, skills, languages + PDF download. */
 export async function resumePage(): Promise<Node> {
@@ -25,6 +25,7 @@ export async function resumePage(): Promise<Node> {
 
     resumeSection("Education", resume.education.map(entryEl)),
     resumeSection("Work Experience", resume.experience.map(entryEl)),
+    resumeSection("Professional Projects", resume.projects.map(projectEntryEl)),
     resumeSection("Skills", [
       el("div", { class: "skill-groups" },
         ...resume.skills.map((g) =>
@@ -59,5 +60,47 @@ function entryEl(entry: ResumeEntry): HTMLElement {
       el("span", { class: "resume-period" }, entry.period)),
     el("div", { class: "resume-org" }, entry.org),
     el("ul", {}, ...entry.points.map((p) => el("li", {}, p))),
+  );
+}
+
+function projectEntryEl(project: ResumeProject): HTMLElement {
+  return el(
+    "div",
+    { class: "resume-entry" },
+
+    el("strong", {}, project.title),
+
+    project.technologies.length > 0
+      ? el(
+          "div",
+          { class: "tech-badges" },
+          ...project.technologies.map((t) => el("span", { class: "tech-badge" }, t)),
+        )
+      : el("div"),
+
+
+
+    el("ul", {}, ...project.points.map((p) => el("li", {}, p))),
+        project.links.length > 0
+      ? el(
+          "div",
+          { class: "project-links" },
+          ...project.links.flatMap((link, index) => [
+            ...(index > 0 ? [document.createTextNode(" | ")] : []),
+            el(
+              "a",
+              {
+                href: link.url,
+                class: "project-link",
+                attrs: {
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                },
+              },
+              link.name,
+            ),
+          ]),
+        )
+      : el("div"),
   );
 }
