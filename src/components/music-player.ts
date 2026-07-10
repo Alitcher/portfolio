@@ -8,7 +8,7 @@
  */
 
 // https://www.youtube.com/watch?v=oSic7ENMPHE&list=PLVxepTZKDj64
-const YT_VIDEO_ID = "oSic7ENMPHE";
+const YT_VIDEO_ID = "DrmpZtxr0kY";
 const YT_PLAYLIST_ID = "PLVxepTZKDj64";
 
 interface YTPlayer {
