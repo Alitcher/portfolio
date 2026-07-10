@@ -15,9 +15,9 @@ export function systemInfoPanel(): HTMLElement {
       "dl",
       { class: "sysinfo" },
       el("dt", {}, "OS:"), el("dd", {}, "Windows 11"),
-      el("dt", {}, "Editor:"), el("dd", {}, "Rider"),
-      el("dt", {}, "Engine:"), el("dd", {}, "Unity 2022.3 LTS"),
-      el("dt", {}, "Language:"), el("dd", {}, "C#, C++, TS"),
+      el("dt", {}, "Editor:"), el("dd", {}, "VS Code"),
+      el("dt", {}, "Engine:"), el("dd", {}, "Unity 6.3 LTS"),
+      el("dt", {}, "Language:"), el("dd", {}, "C#, C++, Python, TS, JS, Java, Latex, GLSL, HLSL"),
     ),
     el("div", {}, "Coffee Level:"),
     el(

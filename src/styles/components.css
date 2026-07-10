@@ -168,8 +168,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 2px 3px;
-  background: linear-gradient(90deg, #000080, #1084d0);
-  color: #fff;
+  background: var(--titlebar);
+  color: var(--titlebar-text);
   font-weight: bold;
   font-size: 12px;
 }

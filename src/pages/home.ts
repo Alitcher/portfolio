@@ -37,7 +37,7 @@ export async function homePage(): Promise<Node> {
   );
 
   const projectsWindow = windowEl(
-    { title: ":: FEATURED PROJECTS ::", controls: [] },
+    { title: ":: FEATURED PROJECTS ::", controls: closeOnly() },
     el("div", { class: "projects-grid" }, ...featured.map((p) => projectCard(p, { variant: "compact" }))),
   );
 
@@ -70,7 +70,7 @@ export async function homePage(): Promise<Node> {
   );
 
   const techWindow = windowEl(
-    { title: ":: TECH STACK ::", controls: [] },
+    { title: ":: TECH STACK ::", controls: closeOnly() },
     el(
       "ul",
       { class: "stack-list" },
@@ -142,9 +142,9 @@ function badge88(left: string, line1: string, line2: string, extra: string): HTM
 function restoreClose() {
   return [
     { label: "Restore", symbol: "&#8599;" },
-    { label: "Close", symbol: "X" },
+    { label: "Collapse", symbol: "-", collapse: true },
   ];
 }
 function closeOnly() {
-  return [{ label: "Close", symbol: "X" }];
+  return [{ label: "Collapse", symbol: "-", collapse: true }];
 }

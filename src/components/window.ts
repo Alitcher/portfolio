@@ -4,6 +4,11 @@ export interface WindowControl {
   readonly label: string;
   readonly symbol: string;
   readonly onClick?: () => void;
+  /**
+   * When true, this button collapses the window body on click and expands it
+   * again on the next click (a classic minimize/restore toggle).
+   */
+  readonly collapse?: boolean;
 }
 
 export interface WindowOptions {
@@ -17,8 +22,7 @@ export interface WindowOptions {
 }
 
 const DEFAULT_CONTROLS: readonly WindowControl[] = [
-  { label: "Minimize", symbol: "_" },
-  { label: "Close", symbol: "X" },
+  { label: "Collapse", symbol: "-", collapse: true },
 ];
 
 /**
@@ -33,25 +37,33 @@ export function createWindow(
 
   const body = el("div", { class: `body ${options.bodyClass ?? ""}`.trim() }, ...content);
 
-  const root = el(
-    "section",
-    { class: `window ${options.className ?? ""}`.trim() },
+  const root = el("section", { class: `window ${options.className ?? ""}`.trim() });
+
+  const toggleCollapse = (btn: HTMLElement) => {
+    const collapsed = root.classList.toggle("collapsed");
+    btn.setAttribute("aria-expanded", String(!collapsed));
+  };
+
+  const buttons = controls.map((c) => {
+    const btn = el("button", {
+      class: "win-btn",
+      html: c.symbol,
+      attrs: { "aria-label": c.label, type: "button" },
+    });
+    if (c.onClick) btn.addEventListener("click", c.onClick);
+    else if (c.collapse) {
+      btn.setAttribute("aria-expanded", "true");
+      btn.addEventListener("click", () => toggleCollapse(btn));
+    }
+    return btn;
+  });
+
+  root.append(
     el(
       "div",
       { class: "titlebar" },
       el("span", {}, options.title),
-      el(
-        "span",
-        { class: "controls" },
-        ...controls.map((c) =>
-          el("button", {
-            class: "win-btn",
-            html: c.symbol,
-            attrs: { "aria-label": c.label, type: "button" },
-            on: c.onClick ? { click: c.onClick } : undefined,
-          }),
-        ),
-      ),
+      el("span", { class: "controls" }, ...buttons),
     ),
     body,
   );

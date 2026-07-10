@@ -77,6 +77,15 @@
 .window > .body {
   padding: 12px;
 }
+.window.collapsed > .titlebar {
+  border-bottom: none;
+}
+.window.collapsed > .body {
+  display: none;
+}
+.window > .titlebar .controls .win-btn {
+  cursor: pointer;
+}
 
 /* ---- Sidebar panels ---- */
 .panel {
