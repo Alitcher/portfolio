@@ -55,6 +55,24 @@ hr {
   animation: blink 1.4s steps(1) infinite;
   vertical-align: middle;
 }
+/* Schedule-driven tones for the live status dot */
+.status-dot[data-tone="coding"] {
+  background: #00a800;
+  box-shadow: 0 0 3px #00ff00;
+}
+.status-dot[data-tone="food"] {
+  background: #d88000;
+  box-shadow: 0 0 3px #ffb000;
+}
+.status-dot[data-tone="dinner"] {
+  background: #c04040;
+  box-shadow: 0 0 3px #ff6060;
+}
+.status-dot[data-tone="sleeping"] {
+  background: #4060c0;
+  box-shadow: 0 0 3px #6080ff;
+  animation: none; /* resting, so no blink */
+}
 @keyframes blink {
   50% {
     opacity: 0.25;

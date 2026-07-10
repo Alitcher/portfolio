@@ -7,7 +7,7 @@ import "./styles/pages.css";
 
 import { el, clear } from "./components/dom.js";
 import { navMenu } from "./components/menu.js";
-import { systemInfoPanel } from "./components/sidebar.js";
+import { systemInfoPanel, statusPanel } from "./components/sidebar.js";
 import { visitorCounter, updateVisitorCounter } from "./components/counter.js";
 import { statusBar, liveClock } from "./components/statusbar.js";
 import { Router } from "./services/router.js";
@@ -110,7 +110,7 @@ router.start((node, ctx) => {
   // Refresh the left sidebar (nav highlight) and swap the page region.
   const route = "#" + ctx.path;
   clear(leftSidebar);
-  leftSidebar.append(navMenu(route), systemInfoPanel());
+  leftSidebar.append(navMenu(route), statusPanel(), systemInfoPanel());
 
   // Remove everything after the persistent left sidebar, then mount the page.
   while (layout.children.length > 1) layout.lastElementChild!.remove();
