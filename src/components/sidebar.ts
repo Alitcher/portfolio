@@ -129,6 +129,6 @@ export function systemInfoPanel(): HTMLElement {
     })(),
     el("div", { class: "current-project" }, "Current: OpenGL Renderer v2"),
     el("div", { class: "learning" }, "Learning: Vulkan"),
-    el("div", { class: "last-updated-side" }, "Last Updated: June 30, 2026"),
+    el("div", { class: "last-updated-side" }, `Last Updated: ${__LAST_UPDATED__}`),
   );
 }

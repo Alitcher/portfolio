@@ -84,7 +84,7 @@ const header = el(
 
 const leftSidebar = el("aside", { class: "sidebar-left" });
 const layout = el("div", { class: "layout" }, leftSidebar);
-const footer = statusBar("June 30, 2026");
+const footer = statusBar(__LAST_UPDATED__);
 const crtOverlay = el("div", { class: "crt-overlay", attrs: { "aria-hidden": "true" } });
 
 clear(app);
