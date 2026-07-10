@@ -8,6 +8,7 @@
 
 const rawBase = (import.meta.env.VITE_API_BASE_URL ?? "").trim();
 const rawChat = (import.meta.env.VITE_CHAT_API_URL ?? "").trim();
+const rawCounter = (import.meta.env.VITE_COUNTER_API_URL ?? "").trim();
 
 export const config = {
   /** Backend origin, or "" for fully static / mock mode. */
@@ -24,6 +25,16 @@ export const config = {
   chatApiUrl: rawChat.replace(/\/+$/, ""),
   get useRemoteChat(): boolean {
     return this.chatApiUrl.length > 0;
+  },
+  /**
+   * URL of the real visitor-counter endpoint (the serverless function backed by
+   * Upstash Redis). Set VITE_COUNTER_API_URL=/api/visitor-count to get a genuine
+   * global count that counts each device once; leave empty to fall back to the
+   * local per-device count.
+   */
+  counterApiUrl: rawCounter.replace(/\/+$/, ""),
+  get useRemoteCounter(): boolean {
+    return this.counterApiUrl.length > 0;
   },
   siteOwner: "Alicia Pankka",
   contact: {

@@ -54,7 +54,9 @@ const topBar = el(
   ),
 );
 
-const counterMount = visitorCounter(config.useRemoteApi ? 0 : 1327);
+// Start at 0 when a real count will load from the server, so we never flash the
+// local seed; the offline fallback keeps the retro seed for a "lived-in" look.
+const counterMount = visitorCounter(config.useRemoteApi || config.useRemoteCounter ? 0 : 1327);
 const header = el(
   "header",
   { class: "site-header" },

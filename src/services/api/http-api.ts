@@ -1,5 +1,6 @@
 import type { Project, BlogPost, Resume, ChatMessage } from "../../types.js";
 import type { PortfolioApi } from "./api.interface.js";
+import { getDeviceId } from "../device-id.js";
 
 /**
  * REST-backed implementation of `PortfolioApi`. Activated automatically when
@@ -47,7 +48,12 @@ export class HttpApi implements PortfolioApi {
   }
 
   async registerVisit(): Promise<number> {
-    const res = await fetch(this.url("/api/visitor-count"), { method: "POST" });
+    // Send a stable device id so the backend can count each device once.
+    const res = await fetch(this.url("/api/visitor-count"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ deviceId: getDeviceId() }),
+    });
     if (!res.ok) throw new Error(`registerVisit failed: ${res.status}`);
     const data = (await res.json()) as { count: number };
     return data.count;

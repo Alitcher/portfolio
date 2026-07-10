@@ -3,6 +3,8 @@ import type { ChatMessage } from "../types.js";
 import { LocalApi } from "./api/local-api.js";
 import { HttpApi } from "./api/http-api.js";
 import { streamChatFrom } from "./api/remote-chat.js";
+import { fetchVisitorCount, registerVisitRemote } from "./api/remote-counter.js";
+import { getDeviceId } from "./device-id.js";
 import { config } from "../config.js";
 
 export type { PortfolioApi } from "./api/api.interface.js";
@@ -18,15 +20,28 @@ export type { PortfolioApi } from "./api/api.interface.js";
  * serverless endpoint while the rest of the data stays local. This single
  * indirection is what makes the frontend backend-ready.
  */
-const base: PortfolioApi = config.useRemoteApi ? new HttpApi(config.apiBaseUrl) : new LocalApi();
+let impl: PortfolioApi = config.useRemoteApi ? new HttpApi(config.apiBaseUrl) : new LocalApi();
 
-export const api: PortfolioApi = config.useRemoteChat
-  ? {
-      ...bind(base),
-      chat: (messages: ChatMessage[], signal?: AbortSignal) =>
-        streamChatFrom(config.chatApiUrl, messages, signal),
-    }
-  : base;
+// The real global visitor count is an independent layer: it can front a
+// same-origin serverless counter (Upstash) while the rest of the data stays
+// local — exactly like the chat override below.
+if (config.useRemoteCounter) {
+  impl = {
+    ...bind(impl),
+    getVisitorCount: () => fetchVisitorCount(config.counterApiUrl),
+    registerVisit: () => registerVisitRemote(config.counterApiUrl, getDeviceId()),
+  };
+}
+
+if (config.useRemoteChat) {
+  impl = {
+    ...bind(impl),
+    chat: (messages: ChatMessage[], signal?: AbortSignal) =>
+      streamChatFrom(config.chatApiUrl, messages, signal),
+  };
+}
+
+export const api: PortfolioApi = impl;
 
 /** Copy the base API's methods with `this` bound, so spreading keeps them working. */
 function bind(impl: PortfolioApi): PortfolioApi {

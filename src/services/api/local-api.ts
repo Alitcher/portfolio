@@ -6,6 +6,7 @@ import { BLOG_POSTS } from "../data/blog.js";
 import { answerQuestion } from "../knowledge.js";
 
 const VISITOR_KEY = "alicia.visitorCount";
+const VISITED_KEY = "alicia.counted";
 const VISITOR_SEED = 1327;
 
 /**
@@ -39,9 +40,18 @@ export class LocalApi implements PortfolioApi {
   }
 
   async registerVisit(): Promise<number> {
+    // Count each device once: a reload or return visit from the same browser
+    // must not bump the number. (Offline fallback - the real global count lives
+    // in the serverless Upstash counter; see remote-counter.ts.)
+    try {
+      if (localStorage.getItem(VISITED_KEY)) return this.readCount();
+    } catch {
+      /* storage unavailable - fall through and count this session */
+    }
     const next = this.readCount() + 1;
     try {
       localStorage.setItem(VISITOR_KEY, String(next));
+      localStorage.setItem(VISITED_KEY, "1");
     } catch {
       /* storage may be unavailable (private mode) - count stays ephemeral */
     }

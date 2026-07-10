@@ -53,6 +53,23 @@ VITE_API_BASE_URL=https://api.example.com
 | POST   | `/api/visitor-count`  | Register a visit           |
 | POST   | `/api/chat`           | Streaming AI chat (SSE/chunked) |
 
+### Real visitor counter
+
+The visitor number is a **genuine global count that counts each device once** — a
+reload or return visit from the same browser never inflates it. Each browser gets
+an anonymous device id (a random UUID in `localStorage`); the serverless function
+in `api/visitor-count.ts` stores those ids in an [Upstash](https://upstash.com)
+Redis set (`SADD` is idempotent) and returns the set size (`SCARD`).
+
+To enable it (Vercel/Netlify — not GitHub Pages, which has no server):
+
+1. Create a free Upstash Redis database.
+2. Set the server env vars `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`.
+3. Set `VITE_COUNTER_API_URL=/api/visitor-count` for the frontend.
+
+Without these, the site falls back to a local per-device count (seeded for the
+retro look), which is still counted only once per device.
+
 ### Folder structure
 
 ```
