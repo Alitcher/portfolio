@@ -5,6 +5,8 @@ import { aiChat } from "../components/ai-chat.js";
 import { pageRegion, fragment, formatDate } from "./shared.js";
 import { api } from "../services/api.js";
 import { config } from "../config.js";
+import { HOME } from "../services/data/home.js";
+import type { HomeLink } from "../types.js";
 
 /** The homepage: several stacked windows plus the home-only right sidebar. */
 export async function homePage(): Promise<Node> {
@@ -16,23 +18,16 @@ export async function homePage(): Promise<Node> {
     el(
       "div",
       { class: "welcome-text" },
-      el("h3", { html: "Hello! &#128075;" }),
-      el("p", {}, "I'm Alicia, a developer who loves building interactive experiences, tools and systems."),
-      el("p", {}, "I work with Unity for XR, build backend services, and explore the world of computer graphics — with a soft spot for C++ and distributed systems."),
-      el("p", { class: "focus-lead" }, "Currently focusing on:"),
-      el(
-        "ul",
-        {},
-        el("li", {}, "Unity XR development (VR / AR / MR)"),
-        el("li", {}, "Backend systems & distributed architecture"),
-        el("li", {}, "Real-time rendering & graphics programming"),
-      ),
+      el("h3", { html: HOME.welcome.greetingHtml }),
+      ...HOME.welcome.intro.map((text) => el("p", {}, text)),
+      el("p", { class: "focus-lead" }, HOME.welcome.focusLead),
+      el("ul", {}, ...HOME.welcome.focus.map((item) => el("li", {}, item))),
     ),
     el(
       "div",
       { class: "welcome-side" },
       el("div", { class: "pc-art", html: "&#128421;&#65039;", attrs: { "aria-hidden": "true" } }),
-      el("div", { class: "powered-badge raised", html: "Powered by<br>&#9749; &amp; Curiosity" }),
+      el("div", { class: "powered-badge raised", html: HOME.welcome.poweredBadgeHtml }),
     ),
   );
 
@@ -74,12 +69,7 @@ export async function homePage(): Promise<Node> {
     el(
       "ul",
       { class: "stack-list" },
-      stackItem("chip-unity", "U", "Unity, C#"),
-      stackItem("chip-cpp", "C+", "C++"),
-      stackItem("chip-gl", "GL", "OpenGL / Vulkan"),
-      stackItem("chip-ts", "TS", "TypeScript, Node.js"),
-      stackItem("chip-db", "DB", "PostgreSQL, RabbitMQ"),
-      stackItem("chip-docker", "&#128051;", "Docker, Linux"),
+      ...HOME.techStack.map((s) => stackItem(s.chipClass, s.chip, s.label)),
     ),
   );
 
@@ -87,21 +77,14 @@ export async function homePage(): Promise<Node> {
     "section",
     { class: "panel" },
     el("h2", {}, ":: LINKS ::"),
-    el(
-      "div",
-      { class: "links-grid" },
-      linkBtn("lb-gh", "GH", "GitHub", config.contact.github),
-      linkBtn("lb-in", "in", "LinkedIn", config.contact.linkedin),
-      linkBtn("lb-pdf", "R", "Resume (PDF)", "#/resume"),
-      linkBtn("lb-mail", "&#9993;", "Email Me", `mailto:${config.contact.email}`),
-    ),
+    el("div", { class: "links-grid" }, ...HOME.links.map(linkBtn)),
   );
 
   const miscPanel = el(
     "section",
     { class: "panel" },
     el("h2", {}, ":: MISC ::"),
-    el("p", { html: "Best viewed in:<br>1024 x 768 or higher" }),
+    el("p", { html: HOME.misc.bestViewedHtml }),
     el(
       "div",
       { class: "badges" },
@@ -119,13 +102,28 @@ function stackItem(chipClass: string, chip: string, label: string): HTMLElement 
   return el("li", {}, el("span", { class: `chip ${chipClass}`, html: chip }), " " + label);
 }
 
-function linkBtn(iconClass: string, icon: string, label: string, href: string): HTMLElement {
+function linkBtn(link: HomeLink): HTMLElement {
   return el(
     "a",
-    { class: "link-btn", href },
-    el("span", { class: `lb-icon ${iconClass}`, html: icon }),
-    " " + label,
+    { class: "link-btn", href: resolveLinkHref(link) },
+    el("span", { class: `lb-icon ${link.iconClass}`, html: link.icon }),
+    " " + link.label,
   );
+}
+
+/** Resolve a link's destination: an explicit href, or a value from config.contact. */
+function resolveLinkHref(link: HomeLink): string {
+  if (link.href) return link.href;
+  switch (link.contactKey) {
+    case "github":
+      return config.contact.github;
+    case "linkedin":
+      return config.contact.linkedin;
+    case "email":
+      return `mailto:${config.contact.email}`;
+    default:
+      return "#";
+  }
 }
 
 function badge88(left: string, line1: string, line2: string, extra: string): HTMLElement {

@@ -88,6 +88,49 @@ export interface Resume {
   readonly pdfUrl: string;
 }
 
+/** A chip in the homepage "Tech Stack" panel. `chip` may contain HTML entities. */
+export interface StackItem {
+  readonly chipClass: string;
+  readonly chip: string;
+  readonly label: string;
+}
+
+/**
+ * A button in the homepage "Links" panel. Provide either an explicit `href`
+ * (e.g. "#/resume") or a `contactKey` that resolves to the matching value in
+ * `config.contact` — keeping shared contact URLs in a single source of truth.
+ */
+export interface HomeLink {
+  readonly iconClass: string;
+  /** Icon glyph or HTML entity shown inside the button. */
+  readonly icon: string;
+  readonly label: string;
+  readonly href?: string;
+  readonly contactKey?: "github" | "linkedin" | "email";
+}
+
+/**
+ * All the editable, non-list content of the homepage. Lives in
+ * `src/content/home.json` so it can be edited without touching code. Featured
+ * projects and blog posts are NOT here — they come from their own data sources.
+ */
+export interface HomeContent {
+  readonly welcome: {
+    readonly greetingHtml: string;
+    /** Intro paragraphs, one entry per <p>. */
+    readonly intro: readonly string[];
+    readonly focusLead: string;
+    /** Bullet points under the "focusing on" heading. */
+    readonly focus: readonly string[];
+    readonly poweredBadgeHtml: string;
+  };
+  readonly techStack: readonly StackItem[];
+  readonly links: readonly HomeLink[];
+  readonly misc: {
+    readonly bestViewedHtml: string;
+  };
+}
+
 export type ChatRole = "user" | "assistant";
 
 export interface ChatMessage {

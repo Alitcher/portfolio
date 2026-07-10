@@ -1,0 +1,34 @@
+{
+  "welcome": {
+    "greetingHtml": "Heya! &#128075;",
+    "intro": [
+      "I'm Alicia, a computer science graduate and software engineer since 2020 with 5 years of experience in Unity development and hands-on experience in Linux and full-stack development.",
+      "I'm located in Helsinki and work for Helsinki XR Center(HXRC) developing XR projects, making decision in architecture. I work with teams of developers, artists and stakeholdersas a developer and a project lead.",
+      "I'm exploring GIS and computer graphics - with a soft spot for C++ and distributed systems."
+    ],
+    "focusLead": "Currently focusing on:",
+    "focus": [
+      "Digital Twins and GIS development",
+      "Backend systems & distributed architecture",
+      "Real-time rendering & graphics programming"
+    ],
+    "poweredBadgeHtml": "Powered by<br>&#9749;  &amp; &#127858;"
+  },
+  "techStack": [
+    { "chipClass": "chip-unity", "chip": "U", "label": "Unity, C#" },
+    { "chipClass": "chip-cpp", "chip": "C+", "label": "C++" },
+    { "chipClass": "chip-gl", "chip": "GL", "label": "OpenGL / Vulkan" },
+    { "chipClass": "chip-ts", "chip": "TS", "label": "TypeScript, Node.js" },
+    { "chipClass": "chip-db", "chip": "DB", "label": "PostgreSQL, RabbitMQ" },
+    { "chipClass": "chip-docker", "chip": "&#128051;", "label": "Docker, Linux" }
+  ],
+  "links": [
+    { "iconClass": "lb-gh", "icon": "GH", "label": "GitHub", "contactKey": "github" },
+    { "iconClass": "lb-in", "icon": "in", "label": "LinkedIn", "contactKey": "linkedin" },
+    { "iconClass": "lb-pdf", "icon": "R", "label": "Resume (PDF)", "href": "#/resume" },
+    { "iconClass": "lb-mail", "icon": "&#9993;", "label": "Email Me", "contactKey": "email" }
+  ],
+  "misc": {
+    "bestViewedHtml": "Best viewed in:<br>1024 x 768 or higher"
+  }
+}
