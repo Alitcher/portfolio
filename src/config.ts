@@ -27,9 +27,9 @@ export const config = {
   },
   siteOwner: "Alicia Pankka",
   contact: {
-    email: "alicia.sudlerd@gmail.com",
-    github: "https://github.com/",
-    linkedin: "https://www.linkedin.com/",
+    email: "alicia.pankka@gmail.com",
+    github: "https://github.com/Alitcher/",
+    linkedin: "https://www.linkedin.com/in/aliciagamedev/",
     location: "Finland",
   },
 } as const;

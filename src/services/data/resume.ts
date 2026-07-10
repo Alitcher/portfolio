@@ -344,5 +344,5 @@ export const RESUME: Resume = {
     },
   ],
 
-  pdfUrl: "./assets/resume.pdf",
+  pdfUrl: "./assets/Alicia Pankka-CV-2026.3.pdf",
 };

@@ -44,7 +44,7 @@ About Alicia:
 - Location: Finland.
 - Core tech: C#, C++, TypeScript, Unity, OpenGL/Vulkan, RabbitMQ.
 - Interests: VR/AR training applications, rendering, distributed systems.
-- Contact: alicia.sudlerd@gmail.com
+- Contact: alicia.pankka@gmail.com
 
 Highlighted projects (describe these when asked):
 - OpenGL Renderer v2 — a real-time rendering engine (current project).

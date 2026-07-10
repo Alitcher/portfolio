@@ -48,8 +48,8 @@ export async function contactPage(): Promise<Node> {
     "div",
     { class: "contact-info" },
     infoRow("&#9993;", "Email", config.contact.email, `mailto:${config.contact.email}`),
-    infoRow("GH", "GitHub", "github.com/alicia", config.contact.github),
-    infoRow("in", "LinkedIn", "linkedin.com/in/alicia", config.contact.linkedin),
+    infoRow("GH", "GitHub", "github.com/Alitcher", config.contact.github),
+    infoRow("in", "LinkedIn", "linkedin.com/in/aliciagamedev", config.contact.linkedin),
     infoRow("&#128205;", "Location", config.contact.location, ""),
   );
 
