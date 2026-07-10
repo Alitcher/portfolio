@@ -30,6 +30,12 @@ export interface Project {
   readonly thumbTheme: string;
   /** Short label drawn inside the thumbnail placeholder. */
   readonly thumbLabel: string;
+  /**
+   * Optional path to a committed screenshot of the live site (e.g.
+   * "./assets/screenshots/foo.png"). When set, cards and the detail page show
+   * this real screenshot instead of the pixel-art placeholder.
+   */
+  readonly screenshot?: string;
 }
 
 export interface BlogPost {

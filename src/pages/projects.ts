@@ -1,6 +1,7 @@
 import { el, clear } from "../components/dom.js";
 import { windowEl } from "../components/window.js";
 import { projectCard } from "../components/project-card.js";
+import { browserWindow } from "../components/browser-window.js";
 import { pageRegion, backLink } from "./shared.js";
 import { api } from "../services/api.js";
 import type { Project, ProjectCategory } from "../types.js";
@@ -71,19 +72,36 @@ export async function projectDetailPage(slug: string): Promise<Node> {
     );
   }
 
-  const win = windowEl(
-    { title: `:: ${project.title.toUpperCase()} ::`, controls: [] },
+  // Projects with a live site get a real screenshot inside a retro browser
+  // window as the hero; the rest keep the pixel-art placeholder tile plus a
+  // separate Screenshots section.
+  const pixelHero = el("div", { class: `detail-hero thumb-${project.thumbTheme}`, html: project.thumbLabel });
+  const parts: Node[] = [
     backLink("#/projects", "Back to Projects"),
-    el("div", { class: `detail-hero thumb-${project.thumbTheme}`, html: project.thumbLabel }),
-
+    project.screenshot
+      ? browserWindow(project.links.demo ?? "", project.screenshot, {
+          title: project.title,
+          fallback: pixelHero,
+        })
+      : pixelHero,
     section("Overview", el("p", {}, project.overview)),
-    section("Screenshots", el("div", { class: "screenshot-row" },
-      screenshotPlaceholder(project), screenshotPlaceholder(project))),
+  ];
+
+  if (!project.screenshot) {
+    parts.push(
+      section("Screenshots", el("div", { class: "screenshot-row" },
+        screenshotPlaceholder(project), screenshotPlaceholder(project))),
+    );
+  }
+
+  parts.push(
     section("Technologies", techBadges(project.tech)),
     section("Lessons Learned", el("ul", { class: "lessons" },
       ...project.lessons.map((l) => el("li", {}, l)))),
     linksRow(project),
   );
+
+  const win = windowEl({ title: `:: ${project.title.toUpperCase()} ::`, controls: [] }, ...parts);
 
   return pageRegion(win);
 }

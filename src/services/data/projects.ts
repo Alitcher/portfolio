@@ -20,10 +20,11 @@ export const PROJECTS: readonly Project[] = [
       "Clustering hundreds of markers without janky panning.",
       "Building a lightweight moderation workflow for submissions.",
     ],
-    links: { github: "https://github.com/Alitcher/CosGisClient", demo: "" },
+    links: { github: "https://github.com/Alitcher/CosGisClient", demo: "https://cosoraatlas.vercel.app/" },
     featured: true,
     thumbTheme: "map",
     thumbLabel: "&#128205; MAP",
+    screenshot: "./assets/screenshots/cosoraatlas.png",
   },
   {
     slug: "aistart",

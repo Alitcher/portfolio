@@ -147,6 +147,86 @@
   text-shadow: 1px 1px 0 #000;
   image-rendering: pixelated;
 }
+.project-card .thumb-shot {
+  width: 100%;
+  object-fit: cover;
+  object-position: top center;
+  background: #000;
+  image-rendering: auto;
+}
+
+/* Retro browser window wrapping a live screenshot */
+.browser-window {
+  margin-bottom: 14px;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #dfdfdf #808080 #808080 #dfdfdf;
+  box-shadow: 1px 1px 0 #000;
+}
+.bw-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 3px;
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+}
+.bw-title {
+  padding: 1px 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bw-controls .bw-btn {
+  display: inline-block;
+  min-width: 16px;
+  margin-left: 2px;
+  text-align: center;
+  color: #000;
+  background: #c0c0c0;
+  border: 1px solid;
+  border-color: #fff #808080 #808080 #fff;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 14px;
+}
+.bw-addressbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 5px;
+  font-size: 11px;
+  color: #000;
+  border-bottom: 1px solid #808080;
+}
+.bw-addr-url {
+  flex: 1;
+  padding: 1px 5px;
+  background: #fff;
+  border: 1px solid;
+  border-color: #808080 #fff #fff #808080;
+  font-family: var(--font-mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bw-viewport {
+  overflow: hidden;
+  background: #fff;
+}
+.bw-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.bw-fallback {
+  padding: 40px 20px;
+  text-align: center;
+  color: #555;
+  font-family: var(--font-mono);
+}
 .project-card h4 {
   margin: 8px 0 4px;
 }
