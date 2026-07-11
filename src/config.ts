@@ -41,6 +41,6 @@ export const config = {
     email: "alicia.pankka@gmail.com",
     github: "https://github.com/Alitcher/",
     linkedin: "https://www.linkedin.com/in/aliciagamedev/",
-    location: "Finland",
+    location: "Helsinki,Finland",
   },
 } as const;

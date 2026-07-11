@@ -11,7 +11,7 @@ export function statusBar(lastUpdated: string): HTMLElement {
     el(
       "span",
       {},
-      "Thanks for visiting! ",
+      "Thanks for visiting! >_< ",
       el("span", { class: "heart", html: "&#10084;" }),
     ),
   );

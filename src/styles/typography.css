@@ -80,7 +80,8 @@ hr {
 }
 @media (prefers-reduced-motion: reduce) {
   .status-dot,
-  .ai-online::before {
+  .ai-online::before,
+  .coffee-bar .fill::after {
     animation: none;
   }
 }
