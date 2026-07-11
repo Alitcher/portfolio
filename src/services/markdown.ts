@@ -2,8 +2,9 @@ import { escapeHtml } from "../components/dom.js";
 
 /**
  * A deliberately tiny, dependency-free Markdown -> HTML renderer. It supports the
- * subset used by the blog: headings, bold/italic/inline-code, links, blockquotes,
- * unordered and ordered lists, horizontal rules and paragraphs.
+ * subset used by the blog and project write-ups: headings, bold/italic/inline-code,
+ * links, images, blockquotes, unordered and ordered lists, horizontal rules and
+ * paragraphs.
  *
  * Everything is HTML-escaped first, so raw markdown can never inject markup.
  */
@@ -86,6 +87,11 @@ function inline(text: string): string {
   s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   // *italic*
   s = s.replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>");
+  // ![alt](url) images - must run before links; only http(s)/relative sources
+  s = s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_m, alt, url) => {
+    const safe = /^(https?:\/\/|\.?\/|#)/.test(url) ? url : "";
+    return safe ? `<img src="${safe}" alt="${alt}" loading="lazy" />` : "";
+  });
   // [text](url) - only http(s) and relative links allowed
   s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, label, url) => {
     const safe = /^(https?:\/\/|\.?\/|#|mailto:)/.test(url) ? url : "#";

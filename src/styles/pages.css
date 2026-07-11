@@ -76,8 +76,13 @@
   color: #fff;
   opacity: 0.85;
 }
-.lessons {
-  margin-left: 22px;
+/* Images embedded in Markdown write-ups (blog posts and project pages). */
+.markdown img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 12px 0;
+  border: 1px solid var(--border-mid);
 }
 .detail-links {
   display: flex;

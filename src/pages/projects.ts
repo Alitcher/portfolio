@@ -4,6 +4,7 @@ import { projectCard } from "../components/project-card.js";
 import { browserWindow } from "../components/browser-window.js";
 import { pageRegion, backLink } from "./shared.js";
 import { api } from "../services/api.js";
+import { renderMarkdown } from "../services/markdown.js";
 import type { Project, ProjectCategory } from "../types.js";
 
 const FILTERS: { label: string; value: ProjectCategory | "all" }[] = [
@@ -84,20 +85,25 @@ export async function projectDetailPage(slug: string): Promise<Node> {
           fallback: pixelHero,
         })
       : pixelHero,
-    section("Overview", el("p", {}, project.overview)),
   ];
 
-  if (!project.screenshot) {
-    parts.push(
-      section("Screenshots", el("div", { class: "screenshot-row" },
-        screenshotPlaceholder(project), screenshotPlaceholder(project))),
-    );
+  if (project.body) {
+    // Rich Markdown write-up authored in content/projects/<slug>.md. It carries
+    // its own Overview / Lessons headings and any inline images.
+    parts.push(el("div", { class: "detail-section markdown", html: renderMarkdown(project.body) }));
+  } else {
+    // Fallback for projects without a Markdown file yet.
+    parts.push(section("Overview", el("div", { class: "overview", html: project.overview })));
+    if (!project.screenshot) {
+      parts.push(
+        section("Screenshots", el("div", { class: "screenshot-row" },
+          screenshotPlaceholder(project), screenshotPlaceholder(project))),
+      );
+    }
   }
 
   parts.push(
     section("Technologies", techBadges(project.tech)),
-    section("Lessons Learned", el("ul", { class: "lessons" },
-      ...project.lessons.map((l) => el("li", {}, l)))),
     linksRow(project),
   );
 

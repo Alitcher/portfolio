@@ -19,10 +19,17 @@ export interface Project {
   readonly category: ProjectCategory;
   /** Short one-liner used on cards. */
   readonly summary: string;
-  /** Longer overview shown on the detail/category pages. */
+  /** Plain-text overview used by cards, search and the assistant. */
   readonly overview: string;
+  /**
+   * Rich Markdown write-up for the detail page, authored in
+   * `src/content/projects/<slug>.md` and merged in at load time. Supports
+   * headings, bullet lists and images. This is where the long-form overview
+   * and "lessons learned" now live; the plain-text `overview` above is only
+   * used by cards, search and the assistant.
+   */
+  readonly body?: string;
   readonly tech: readonly string[];
-  readonly lessons: readonly string[];
   readonly links: ProjectLink;
   /** True for the handful of projects surfaced on the homepage. */
   readonly featured: boolean;
@@ -115,6 +122,8 @@ export interface HomeLink {
  * projects and blog posts are NOT here — they come from their own data sources.
  */
 export interface HomeContent {
+  /** Header tagline roles, rendered "|"-separated; the last gets accent styling. */
+  readonly roles: readonly string[];
   readonly welcome: {
     readonly greetingHtml: string;
     /** Intro paragraphs, one entry per <p>. */

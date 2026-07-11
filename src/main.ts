@@ -13,6 +13,7 @@ import { statusBar, liveClock } from "./components/statusbar.js";
 import { Router } from "./services/router.js";
 import { api } from "./services/api.js";
 import { config } from "./config.js";
+import { HOME } from "./services/data/home.js";
 
 import { homePage } from "./pages/home.js";
 import { projectsPage, projectDetailPage } from "./pages/projects.js";
@@ -68,9 +69,11 @@ const header = el(
     el(
       "div",
       { class: "roles" },
-      "Unity XR Developer ", el("span", { class: "sep" }, "|"),
-      " Backend Developer ", el("span", { class: "sep" }, "|"),
-      " ", el("span", { class: "accent" }, "Computer Graphics Enthusiast"),
+      ...HOME.roles.flatMap((role, i) => {
+        const isLast = i === HOME.roles.length - 1;
+        const node = isLast ? el("span", { class: "accent" }, role) : `${role} `;
+        return isLast ? [node] : [node, el("span", { class: "sep" }, "|"), " "];
+      }),
     ),
   ),
   el(

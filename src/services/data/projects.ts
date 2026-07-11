@@ -1,73 +1,47 @@
 import type { Project } from "../../types.js";
 
 /**
- * Canonical project data used by the local mock API. A backend implementation
- * of `GET /api/projects` must return objects matching the `Project` type.
+ * Rich Markdown write-ups, one file per project at `content/projects/<slug>.md`.
+ * Loaded at build time (same mechanism as the blog) and merged onto the matching
+ * project by slug. Edit these files to write overview prose, lessons and images
+ * without touching any TypeScript.
  */
-export const PROJECTS: readonly Project[] = [
-    {
+const bodyFiles = import.meta.glob("../../content/projects/*.md", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+
+const bodyBySlug = new Map<string, string>(
+  Object.entries(bodyFiles).map(([path, raw]) => [
+    path.split("/").pop()!.replace(/\.md$/, ""),
+    raw.trim(),
+  ]),
+);
+
+/**
+ * Structured project metadata used by the local mock API. A backend
+ * implementation of `GET /api/projects` must return objects matching the
+ * `Project` type. Long-form copy lives in the Markdown files above.
+ */
+const PROJECT_META: readonly Project[] = [
+  {
     slug: "cosplay-event-map",
     title: "CosoraAtlas",
     category: "gis",
     summary: "Web map for anime & cosplay events across the Nordics & Baltics.",
     overview:
-      "An interactive web map that aggregates anime, manga and cosplay events across the " +
+      "This is my first solo web project showcasing my coding skills! <br><br>" +
+      "CosoraAtlas is an interactive web map that aggregates anime, manga and cosplay events across the " +
       "Nordic and Baltic region. Users filter by date, category and country, and event " +
       "organisers submit new entries through a moderated pipeline.",
-    tech: ["TypeScript", "Leaflet", "PostGIS", "ASP.NET Core", "PostgreSQL"],
-    lessons: [
-      "Modelling geospatial data cleanly with PostGIS.",
-      "Clustering hundreds of markers without janky panning.",
-      "Building a lightweight moderation workflow for submissions.",
-    ],
+    tech: ["TypeScript", "React", "Leaflet", "MapLibre GL", "NestJS", "PostgreSQL"],
     links: { github: "https://github.com/Alitcher/CosGisClient", demo: "https://cosoraatlas.vercel.app/" },
     featured: true,
     thumbTheme: "map",
     thumbLabel: "&#128205; MAP",
     screenshot: "./assets/screenshots/cosoraatlas.png",
   },
-  {
-    slug: "aistart",
-    title: "AIStart",
-    category: "xr",
-    summary: "XR education platform about AI & drone delivery. Built with Unity XR.",
-    overview:
-      "AIStart is an immersive XR learning experience that teaches the fundamentals of " +
-      "artificial intelligence and autonomous drone delivery. Learners walk through a " +
-      "virtual city, dispatch delivery drones, and watch pathfinding and decision-making " +
-      "unfold in real time.",
-    tech: ["Unity", "C#", "OpenXR", "XR Interaction Toolkit", "Meta Quest 3"],
-    lessons: [
-      "Designing diegetic UI that stays readable inside a headset.",
-      "Keeping frame time under budget while simulating many agents.",
-      "Onboarding non-technical users into VR with zero instructions.",
-    ],
-    links: { github: "https://github.com/", demo: "" },
-    featured: true,
-    thumbTheme: "aistart",
-    thumbLabel: "AI START",
-  },
-  {
-    slug: "vr-factory",
-    title: "VR Factory",
-    category: "xr",
-    summary: "VR training simulation for factory layout & safety. Multi-platform with XR.",
-    overview:
-      "A VR training simulation that lets operators rehearse factory floor layout, machine " +
-      "operation and safety procedures before ever stepping onto a real line. Built to run " +
-      "across tethered PCVR and standalone Quest headsets from a single codebase.",
-    tech: ["Unity", "C#", "XR Interaction Toolkit", "OpenXR", "Addressables"],
-    lessons: [
-      "Abstracting device input so one interaction layer serves every headset.",
-      "Streaming large factory scenes with Addressables to fit memory budgets.",
-      "Building repeatable, measurable training scenarios.",
-    ],
-    links: { github: "https://github.com/", demo: "" },
-    featured: true,
-    thumbTheme: "factory",
-    thumbLabel: "VR FACTORY",
-  },
-
   {
     slug: "opengl-renderer",
     title: "OpenGL Renderer",
@@ -78,11 +52,21 @@ export const PROJECTS: readonly Project[] = [
       "implements a deferred pipeline with physically based shading, shadow mapping, SSAO " +
       "and bloom, and doubles as a testbed for graphics techniques.",
     tech: ["C++", "OpenGL", "GLSL", "GLFW", "Assimp"],
-    lessons: [
-      "Structuring a deferred G-buffer for extensibility.",
-      "Debugging GPU state with RenderDoc as a daily habit.",
-      "Balancing PBR correctness against real-time performance.",
-    ],
+    links: { github: "https://github.com/", demo: "" },
+    featured: true,
+    thumbTheme: "dragon",
+    thumbLabel: "&#128009; GL",
+  },
+  {
+    slug: "flair-ue5-thesis",
+    title: "Flair UE5 Thesis",
+    category: "graphics",
+    summary: "My master thesis defended in 2024.",
+    overview:
+      "A from-scratch real-time rendering engine written in modern C++ and OpenGL. It " +
+      "implements a deferred pipeline with physically based shading, shadow mapping, SSAO " +
+      "and bloom, and doubles as a testbed for graphics techniques.",
+    tech: ["C++", "OpenGL", "GLSL", "GLFW", "Assimp"],
     links: { github: "https://github.com/", demo: "" },
     featured: true,
     thumbTheme: "dragon",
@@ -98,14 +82,15 @@ export const PROJECTS: readonly Project[] = [
       "synchronous calls and PostgreSQL for persistence. The whole stack is containerised " +
       "and reproducible with a single docker compose up.",
     tech: ["ASP.NET Core", "RabbitMQ", "gRPC", "PostgreSQL", "Docker"],
-    lessons: [
-      "Designing idempotent consumers for at-least-once delivery.",
-      "Tracing a request across service boundaries.",
-      "Keeping local dev environments reproducible with Docker.",
-    ],
     links: { github: "https://github.com/", demo: "" },
     featured: false,
     thumbTheme: "backend",
     thumbLabel: "BUS",
   },
 ];
+
+/** Metadata with each project's Markdown body merged in by slug. */
+export const PROJECTS: readonly Project[] = PROJECT_META.map((p) => {
+  const body = bodyBySlug.get(p.slug);
+  return body ? { ...p, body } : p;
+});
