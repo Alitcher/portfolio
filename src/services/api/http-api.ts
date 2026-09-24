@@ -63,7 +63,7 @@ export class HttpApi implements PortfolioApi {
     const res = await fetch(this.url("/api/chat"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages }),
+      body: JSON.stringify({ messages, deviceId: getDeviceId() }),
       signal,
     });
     if (!res.ok || !res.body) throw new Error(`chat failed: ${res.status}`);

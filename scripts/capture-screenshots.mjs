@@ -10,7 +10,7 @@
  *   node scripts/capture-screenshots.mjs --force  # re-capture everything
  *
  * Add a project by giving it an entry below whose `out` matches the
- * `screenshot` path in src/services/data/projects.ts.
+ * `screenshot` path in src/content/projects.json.
  */
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";

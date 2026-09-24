@@ -1,0 +1,33 @@
+{
+  "systemInfo": [
+    {
+      "label": "OS",
+      "value": "Windows 98"
+    },
+    {
+      "label": "Editor",
+      "value": "VS Code"
+    },
+    {
+      "label": "Engine",
+      "value": "Unity 6.x LTS"
+    },
+    {
+      "label": "Language",
+      "value": "C#, C++, Python, TS, JS, Java, Latex, GLSL, HLSL"
+    }
+  ],
+  "coffeeLevel": 77,
+  "current": "Full-stack",
+  "learning": "Computer Graphics",
+  "music": {
+    "videoId": "DrmpZtxr0kY",
+    "playlistId": "PLVxepTZKDj64"
+  },
+  "status": {
+    "coding": "Coding...",
+    "food": "Buffet, please",
+    "dinner": "No dinner...",
+    "sleeping": "Sleeping... zzz"
+  }
+}

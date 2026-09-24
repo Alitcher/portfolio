@@ -1,5 +1,6 @@
 import { el } from "./dom.js";
 import { initMusic, togglePlay, toggleMute, onMusicChange } from "./music-player.js";
+import { SIDEBAR } from "../services/data/sidebar.js";
 
 type StatusTone = "coding" | "food" | "dinner" | "sleeping";
 
@@ -14,12 +15,7 @@ function currentStatus(now = new Date()): { tone: StatusTone; label: string } {
   const hour = now.getHours();
   const isWeekend = day === 0 || day === 6;
 
-  const status: Record<StatusTone, string> = {
-    coding: "Coding...",
-    food: "Enjoying food...",
-    dinner: "Dinner time...",
-    sleeping: "Sleeping... zzz",
-  };
+  const status = SIDEBAR.status; // the text for each tone, from sidebar.json
 
   let tone: StatusTone;
   if (isWeekend) {
@@ -67,9 +63,12 @@ export function statusPanel(): HTMLElement {
 /**
  * The left "SYSTEM INFO" panel: OS, editor, languages, an animated coffee
  * meter, a blinking status light and a now-playing line. Values are static
- * flavour, as permitted by the spec.
+ * flavour, as permitted by the spec, and come from src/content/sidebar.json.
  */
 export function systemInfoPanel(): HTMLElement {
+  const coffee = Math.max(0, Math.min(100, SIDEBAR.coffeeLevel));
+  const coffeeFill = el("div", { class: "fill" });
+  coffeeFill.style.width = `${coffee}%`;
   return el(
     "section",
     { class: "panel sysinfo-panel" },
@@ -77,18 +76,15 @@ export function systemInfoPanel(): HTMLElement {
     el(
       "dl",
       { class: "sysinfo" },
-      el("dt", {}, "OS:"), el("dd", {}, "Windows 11"),
-      el("dt", {}, "Editor:"), el("dd", {}, "VS Code"),
-      el("dt", {}, "Engine:"), el("dd", {}, "Unity 6.3 LTS"),
-      el("dt", {}, "Language:"), el("dd", {}, "C#, C++, Python, TS, JS, Java, Latex, GLSL, HLSL"),
+      ...SIDEBAR.systemInfo.flatMap((row) => [el("dt", {}, `${row.label}:`), el("dd", {}, row.value)]),
     ),
     el("div", {}, "Coffee Level:"),
     el(
       "div",
       { class: "coffee-row" },
       el("span", { html: "&#9749;" }),
-      el("div", { class: "coffee-bar sunken" }, el("div", { class: "fill" })),
-      el("span", {}, "75%"),
+      el("div", { class: "coffee-bar sunken" }, coffeeFill),
+      el("span", {}, `${coffee}%`),
     ),
     el("div", { class: "now-playing-label" }, "Now Playing:"),
     (() => {
@@ -127,8 +123,8 @@ export function systemInfoPanel(): HTMLElement {
         el("div", { class: "music-controls" }, playBtn, muteBtn),
       );
     })(),
-    el("div", { class: "current-project" }, "Current: OpenGL Renderer v2"),
-    el("div", { class: "learning" }, "Learning: Vulkan"),
+    el("div", { class: "current-project" }, `Current: ${SIDEBAR.current}`),
+    el("div", { class: "learning" }, `Learning: ${SIDEBAR.learning}`),
     el("div", { class: "last-updated-side" }, `Last Updated: ${__LAST_UPDATED__}`),
   );
 }

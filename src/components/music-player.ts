@@ -7,9 +7,11 @@
  * own controls are visible.
  */
 
-// https://www.youtube.com/watch?v=oSic7ENMPHE&list=PLVxepTZKDj64
-const YT_VIDEO_ID = "DrmpZtxr0kY";
-const YT_PLAYLIST_ID = "PLVxepTZKDj64";
+import { SIDEBAR } from "../services/data/sidebar.js";
+
+// Which video/playlist plays is set in src/content/sidebar.json ("music").
+const YT_VIDEO_ID = SIDEBAR.music.videoId;
+const YT_PLAYLIST_ID = SIDEBAR.music.playlistId;
 
 interface YTPlayer {
   playVideo(): void;

@@ -201,6 +201,14 @@
   display: flex;
   gap: 8px;
 }
+.chat-quota {
+  margin-top: 4px;
+  font-size: 11px;
+  color: #555;
+}
+.chat-quota:empty {
+  display: none;
+}
 .chat-input-row input {
   flex: 1;
   min-width: 0;
