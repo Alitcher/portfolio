@@ -13,6 +13,12 @@ import {
 } from "../services/chat-quota.js";
 import { config } from "../config.js";
 import type { ChatMessage } from "../types.js";
+// Only the JSON, not ../ai/persona.ts: that builds the AI's prompt, which the page doesn't need.
+import personaContent from "../content/persona.json";
+import type { PersonaContent } from "../ai/persona.js";
+
+// The chat box's name, description and greeting - editable in src/content/persona.json.
+const { name: AI_NAME, chatBox } = personaContent as PersonaContent;
 
 /**
  * The centerpiece: an old-desktop-app styled chat widget wired to the streaming
@@ -29,17 +35,13 @@ export function aiChat(): HTMLElement {
     attrs: { "aria-live": "polite" },
   });
 
-  appendMessage(
-    log,
-    "ai",
-    "Hello! I can help you learn more about my work, skills, or projects. What would you like to know?",
-  );
+  appendMessage(log, "ai", chatBox.greeting);
 
   const input = el("input", {
     type: "text",
     id: "chatInput",
     placeholder: "Type your question here...",
-    attrs: { "aria-label": "Ask AliciaAI", autocomplete: "off", maxlength: "500" },
+    attrs: { "aria-label": `Ask ${AI_NAME}`, autocomplete: "off", maxlength: "500" },
   }) as HTMLInputElement;
 
   // Under the input, from the server's count (see api/chat.ts):
@@ -192,8 +194,8 @@ export function aiChat(): HTMLElement {
       "div",
       { class: "ai-left" },
       el("div", { class: "robot", html: "&#129302;", attrs: { "aria-hidden": "true" } }),
-      el("div", { class: "ai-name" }, "AliciaAI"),
-      el("div", { class: "ai-desc", html: "Your personal dev assistant<br>Ask me anything!" }),
+      el("div", { class: "ai-name" }, AI_NAME),
+      el("div", { class: "ai-desc", html: chatBox.description.map(escapeHtml).join("<br>") }),
       onlineEl,
     ),
     el(
@@ -222,7 +224,7 @@ export function aiChat(): HTMLElement {
 }
 
 function appendMessage(log: HTMLElement, who: "ai" | "user", text: string): HTMLElement {
-  const label = who === "ai" ? "AliciaAI:" : "You:";
+  const label = who === "ai" ? `${AI_NAME}:` : "You:";
   const div = el(
     "div",
     { class: "msg" },
@@ -250,7 +252,7 @@ function appendDialup(log: HTMLElement): HTMLElement & { remove: () => void } {
   log.scrollTop = log.scrollHeight;
 
   const paint = () => {
-    span.textContent = `Connecting to AliciaAI... ${frames[frame]}`;
+    span.textContent = `Connecting to ${AI_NAME}... ${frames[frame]}`;
     frame = (frame + 1) % frames.length;
   };
   paint();

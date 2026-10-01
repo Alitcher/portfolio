@@ -3,6 +3,9 @@
  *
  * The text lives in src/content/persona.json (editable by hand or in the
  * editor under "AI assistant"):
+ *   name       — the assistant's name, shown in the chat box
+ *   chatBox    — the chat box's description lines and first greeting
+ *                (shown on the page, not sent to the AI - see ai-chat.ts)
  *   identity   — who the assistant is (one paragraph)
  *   knowledge  — extra facts it may share that the site's content doesn't say
  *   rules      — hard do's and don'ts
@@ -21,6 +24,7 @@ import { contentKnowledge } from "./content-knowledge.js";
 
 export interface PersonaContent {
   readonly name: string;
+  readonly chatBox: { readonly description: readonly string[]; readonly greeting: string };
   readonly identity: string;
   readonly knowledge: readonly string[];
   readonly rules: readonly string[];
