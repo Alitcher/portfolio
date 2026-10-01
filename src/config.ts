@@ -18,14 +18,12 @@ export const config = {
     return this.apiBaseUrl.length > 0;
   },
   /**
-   * URL of the AI chat endpoint (the serverless function that talks to OpenAI).
-   * Set VITE_CHAT_API_URL=/api/chat to enable the real AI assistant; leave
-   * empty to fall back to the built-in offline mock replies.
+   * URL of the AI chat endpoint (the serverless function that talks to OpenAI,
+   * api/chat.ts). The chat always uses it; only when it can't be reached does it
+   * fall back to basic offline answers, and it tells the visitor so. Override
+   * with VITE_CHAT_API_URL if the endpoint lives somewhere else.
    */
-  chatApiUrl: rawChat.replace(/\/+$/, ""),
-  get useRemoteChat(): boolean {
-    return this.chatApiUrl.length > 0;
-  },
+  chatApiUrl: (rawChat || "/api/chat").replace(/\/+$/, ""),
   /**
    * URL of the real visitor-counter endpoint (the serverless function backed by
    * Upstash Redis). Set VITE_COUNTER_API_URL=/api/visitor-count to get a genuine

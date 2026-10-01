@@ -1,6 +1,6 @@
 import type { ChatMessage } from "../../types.js";
 import { getDeviceId } from "../device-id.js";
-import { ChatLimitError, recordQuota } from "../chat-quota.js";
+import { ChatLimitError, recordQuota, recordLimitReached } from "../chat-quota.js";
 
 /**
  * Streams an assistant reply from our own /api/chat serverless endpoint.
@@ -24,7 +24,9 @@ export async function* streamChatFrom(
 
   if (res.status === 429) {
     const info = (await res.json().catch(() => ({}))) as { limit?: number; windowHours?: number; retryAfter?: number };
-    throw new ChatLimitError(info.limit ?? 5, info.windowHours ?? 4, info.retryAfter ?? 0);
+    const err = new ChatLimitError(info.limit ?? 5, info.windowHours ?? 4, info.retryAfter ?? 0);
+    recordLimitReached(err);
+    throw err;
   }
   if (!res.ok || !res.body) {
     throw new Error(`chat failed: ${res.status}`);

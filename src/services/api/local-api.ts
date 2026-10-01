@@ -10,8 +10,9 @@ const VISITED_KEY = "alicia.counted";
 const VISITOR_SEED = 1327;
 
 /**
- * The fully static implementation of `PortfolioApi`. It serves bundled mock
- * data and answers chat locally, so the site is 100% functional with no server.
+ * The fully static implementation of `PortfolioApi`. It serves bundled data
+ * and has basic keyword-based chat answers, which the site only uses as a
+ * clearly-labelled fallback when the real AI can't be reached (see api.ts).
  * Async signatures mirror the remote API so callers can't tell the difference.
  */
 export class LocalApi implements PortfolioApi {

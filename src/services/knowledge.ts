@@ -7,25 +7,39 @@ import { config } from "../config.js";
 /**
  * The local "AliciaAI" brain. Given the conversation, it produces a reply by
  * matching intent keywords against the same structured data the rest of the site
- * uses. This keeps the offline demo answers accurate and self-consistent.
+ * uses. This keeps the offline answers accurate and self-consistent.
  *
- * When a real backend is configured this module is bypassed entirely in favour
- * of `POST /api/chat`.
+ * It's only the fallback: the chat normally uses the real AI (`POST /api/chat`)
+ * and only lands here, clearly labelled as a basic answer, when that can't be
+ * reached (see chatWithFallback() in services/api.ts).
  */
 export function answerQuestion(messages: ChatMessage[]): string {
   const last = [...messages].reverse().find((m) => m.role === "user");
-  const q = (last?.content ?? "").toLowerCase();
+  const q = (last?.content ?? "").toLowerCase().trim();
 
-  if (!q.trim()) return greeting();
-  if (matches(q, ["hello", "hi", "hey", "greetings"])) return greeting();
+  if (!q) return greeting();
+  if (matches(q, ["hello", "hi", "hey", "greetings"]) && q.split(/\s+/).length <= 3) return greeting();
 
+  // "Can she ...?" / "Does she ...?": answer Yes/No first, like the real AI does.
+  const yesNo = /^(can|could|does|do|did|is|was|are|has|have|will|would)\b/.test(q);
+  const answer = topicAnswer(q);
+  if (answer === null) {
+    return yesNo
+      ? `I don't know - that isn't in the information I have. You can ask Alicia directly at ${config.contact.email}.`
+      : `I don't have information about that. I can tell you about Alicia's Unity XR work, backend systems, ` +
+          `computer graphics projects, resume, education, skills or blog posts.`;
+  }
+  return yesNo ? `Yes - ${answer}` : answer;
+}
+
+/** The answer for the first topic the question mentions, or null if none. */
+function topicAnswer(q: string): string | null {
   if (matches(q, ["xr", "vr", "ar", "unity", "quest", "headset", "immersive"])) {
     const xr = PROJECTS.filter((p) => p.category === "xr");
     return (
       `Alicia is a Unity XR developer working with OpenXR and the XR Interaction Toolkit, ` +
-      `targeting Meta Quest and PCVR. XR projects include ` +
-      `${xr.map((p) => p.title).join(" and ")}. ` +
-      `${xr[0]?.overview ?? ""}`
+      `targeting Meta Quest and PCVR.` +
+      (xr.length ? ` XR projects include ${xr.map((p) => p.title).join(" and ")}. ${xr[0]!.overview}` : "")
     );
   }
 
@@ -69,7 +83,7 @@ export function answerQuestion(messages: ChatMessage[]): string {
     return `${edu.title}, ${edu.org} (${edu.period}). ${edu.points.join(" ")}`;
   }
 
-  if (matches(q, ["skill", "tech", "stack", "language", "tools", "know"])) {
+  if (matches(q, ["skill", "tech", "stack", "language", "tools"])) {
     return (
       `Core skills: ` +
       RESUME.skills.map((g) => `${g.name} — ${g.items.join(", ")}`).join(" | ") +
@@ -97,10 +111,7 @@ export function answerQuestion(messages: ChatMessage[]): string {
     return `${named.title}: ${named.overview} Tech: ${named.tech.join(", ")}.`;
   }
 
-  return (
-    `I can tell you about Alicia's Unity XR work, backend systems, computer graphics ` +
-    `projects, resume, education, skills or blog posts. What would you like to know?`
-  );
+  return null;
 }
 
 function greeting(): string {
@@ -110,6 +121,11 @@ function greeting(): string {
   );
 }
 
+// Whole words only, so "hi" doesn't match "which" and "ar" doesn't match "are".
+// Longer keywords may be the start of a word ("project" matches "projects").
 function matches(text: string, keywords: string[]): boolean {
-  return keywords.some((k) => text.includes(k));
+  return keywords.some((k) => {
+    const escaped = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(k.length <= 3 ? `\\b${escaped}\\b` : `\\b${escaped}`).test(text);
+  });
 }

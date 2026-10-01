@@ -167,6 +167,24 @@
   margin-right: 6px;
   animation: blink 1.4s steps(1) infinite;
 }
+.ai-online.connecting {
+  color: #555;
+}
+.ai-online.connecting::before {
+  background: #888;
+}
+.ai-online.offline {
+  color: #a00000;
+}
+.ai-online.offline::before {
+  background: #c00000;
+}
+.chat-log .msg-offline {
+  margin-top: 3px;
+  font-size: 11px;
+  font-style: italic;
+  color: #a00000;
+}
 .ai-right {
   flex: 1;
   min-width: 0;
@@ -208,6 +226,10 @@
 }
 .chat-quota:empty {
   display: none;
+}
+.chat-quota.limited {
+  color: #a00000;
+  font-weight: bold;
 }
 .chat-input-row input {
   flex: 1;
