@@ -140,6 +140,23 @@ export interface HomeContent {
   };
 }
 
+/**
+ * The left sidebar's STATUS and SYSTEM INFO panels (shown on every page). Lives in
+ * `src/content/sidebar.json` so it can be edited without touching code.
+ */
+export interface SidebarContent {
+  /** "OS: Windows 11" style rows; the colon is added when rendering. */
+  readonly systemInfo: readonly { readonly label: string; readonly value: string }[];
+  /** Coffee meter fill, 0-100 (%). */
+  readonly coffeeLevel: number;
+  readonly current: string;
+  readonly learning: string;
+  /** Background music on YouTube. "Now Playing" shows the video's own title. */
+  readonly music: { readonly videoId: string; readonly playlistId: string };
+  /** Status text for each part of the weekly routine (see sidebar.ts). */
+  readonly status: Readonly<Record<"coding" | "food" | "dinner" | "sleeping", string>>;
+}
+
 export type ChatRole = "user" | "assistant";
 
 export interface ChatMessage {
