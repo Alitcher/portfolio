@@ -21,68 +21,76 @@
   ],
   "experience": [
     {
-      "title": "XR Developer Lead (Full-time)",
+      "title": "XR Developer Lead",
       "org": "Helsinki XR Center (HXRC)",
-      "period": "2025 - Present",
+      "period": "Jan 2025 - Present",
       "points": [
-        "Develop XR research and development projects involving GIS visualization and digital twins.",
-        "Design scalable technical architecture and reusable software components across multiple projects.",
-        "Build data pipelines and transformation workflows for geospatial datasets.",
-        "Lead junior developers and coordinate technical tasks across simultaneous projects.",
-        "Collaborate with partner companies from planning through delivery."
+        "Initiate and develop several RDI related to XR and geospatial data, digital twin projects.",
+        "Organize development tasks, estimate difficulty, and distribute multiple simultaneous tasks.",
+        "Built tool pipelines and transformation logic across projects to facilitate the workflows.",
+        "Define technical architecture and contribute to a scalable, modular, and maintainable setup.",
+        "Collaborate with teams and partner companies throughout development cycles.",
+        "Lead and supervise juniors and team members in high-pressure project environments.",
+        "Organize in-house showroom visits and workshops, after-work sessions, and larger events."
       ]
     },
     {
       "title": "Frontend: Unity3D Developer",
-      "org": "Wildchain",
+      "org": "Wildchain (Digital Wild Animals)",
       "period": "Jan 2022 - Oct 2022",
       "points": [
-        "Developed authentication features together with backend engineers.",
-        "Designed UI architecture and implemented gameplay interfaces in Unity.",
-        "Integrated REST APIs into game systems using UniRx.",
-        "Collaborated with designers to implement gameplay features and polish production builds."
-      ]
-    },
-    {
-      "title": "Unity3D Developer | Music Ed-tech",
-      "org": "BNK Musicmall Co.,Ltd",
-      "period": "Jun 2021 - Dec 2021",
-      "points": [
-        "Integrated MIDI keyboards with Unity using the MIDI Unified plugin.",
-        "Implemented gameplay systems and maintained project architecture.",
-        "Built responsive UI prefabs and gameplay visualizations.",
-        "Worked closely with senior developers using UML-driven development."
+        "Develop an authentication system and cooperate with a backend team",
+        "Design and create UI architecture and logic",
+        "Display data from API to uGUI and in-game sequences using UniRx",
+        "Cooperate with the team designer to visualise features correctly",
+        "Fix bugs before release for senior developers",
+        "Polish in-game graphics system"
       ]
     },
     {
       "title": "Unity3D Developer",
-      "org": "Electronic Extreme (Ragnarok: Battle Academy)",
-      "period": "Jan 2020 - May 2021",
+      "org": "Music Ed-tech, BNK Musicmall Co.,Ltd - Notero",
+      "period": "Jun 2021 - Dec 2021",
       "points": [
-        "Developed inventory, shop, and authentication systems.",
-        "Managed 3D asset pipelines and Unity Editor workflows.",
-        "Integrated Firebase services into production systems.",
-        "Collaborated with artists to deliver production-ready UI."
+        "Connect the game and the MIDI Keyboard using the MIDI Unified plugin",
+        "Initialise game logic and classes",
+        "Maintain up-to-date algorithms based on UML from a senior developer",
+        "Discuss with other developers how to link data between game-sequences",
+        "Create responsive prefabs: UI, the visual piano and raindrops"
       ]
     },
     {
-      "title": "UE5 Integration Engineer (Intern)",
+      "title": "Unity3D Developer",
+      "org": "Ragnarok: Battle Academy, Electronic Extreme",
+      "period": "Jan 2020 - May 2021",
+      "points": [
+        "Manage and develop 3D asset pipelines and automation.",
+        "Develop inventory and shop features through Unity Editor and frontend.",
+        "Implement an authentication and experience with Firebase.",
+        "Collaborate with UI artists to integrate UI into Unity."
+      ]
+    },
+    {
+      "title": "UE5 Integration Engineer (Flair)",
       "org": "Artineering",
       "period": "Mar 2024 - May 2024",
       "points": [
-        "Ported internal tools to Unreal Engine 5 using C++.",
-        "Implemented stylized HLSL shaders.",
-        "Produced technical documentation for the new architecture."
+        "Prototype the new version in C++ UE5, focusing on making stylised HLSL shaders.",
+        "Work closely with the team lead to adapt the original Flair tools to be compatible with UE5.",
+        "Implement documentation to assist team members in understanding the current architecture and utilizing the new tools effectively."
       ]
     },
     {
-      "title": "C++ & Linux Administration (Intern)",
-      "org": "Leil Storage (SaunaFS / LizardFS)",
+      "title": "C++ and Linux Administration (LizardFs, SaunaFS)",
+      "org": "Leil Storage (Diaway)",
       "period": "Jul 2023 - Aug 2023",
       "points": [
-        "Containerized distributed filesystem services using Docker.",
-        "Automated Debian package generation with Bash.",
-        "Worked with RPC communication, integration testing, and Linux server administration."
+        "Develop Dockerfiles to containerize LizardFS services for development and test environments.",
+        "Automate the Debian build packages pipeline and deployment workflows using Bash scripting.",
+        "Engaging in the DevOps process, working with tools like Docker and integration tests.",
+        "Contribute to client-server interactions by working with RPC and user session management.",
+        "Manage user sessions on the admin side and communicate with the server using LizardFs RPC.",
+        "Explore its chunk server and modified source code within a distributed filesystem codebase."
       ]
     }
   ],
@@ -97,23 +105,21 @@
         "Kartta Helsinki (GIS)"
       ],
       "points": [
-        "Personal cosplay hub that maps cosplay-friendly shoot locations and spots around Helsinki (future will expand to Nordics and Baltics).",
-        "Full-stack interactive GIS map - anime conventions plus cosplay-friendly cafés, studios and photo spots with pictures and themes.",
-        "Modeled events and places behind a shared, Zod-validated data contract, persisted in D1 (SQLite) with CRUD, public read APIs, community submissions and admin auth.",
-        "Proxied and cached official venue geometry from Helsinki's Kartta Helsinki (hel.kartta.fi) service; map tiles via MapLibre (OpenStreetMap data), no API keys."
+        "Build an interactive GIS web app that maps anime conventions and cosplay-friendly venues.",
+        "Render a 3D vector map with MapLibre GL.",
+        "Filter venues by city, click to fly to a location, and zoom in for detail cards.",
+        "Implement a navigable event calendar, a light/dark theme, and",
+        "Implement an admin dashboard for creating, editing, and deleting events.",
+        "Design the app to run standalone with sample data, then wire it to the backend.",
+        "Architect as a monorepo of independently deployable Cloudflare Workers microservices.",
+        "Build REST APIs with Hono, backed by a SQLite (D1), covering full CRUD.",
+        "Defined a shared, schema-validated data contract (with Zod) to keep services consistent.",
+        "Create a proxy service that gets and caches official geometry from external mapping services."
       ],
       "links": [
         {
           "name": "Visit Website",
           "url": "https://cosoraatlas.vercel.app/"
-        },
-        {
-          "name": "Video",
-          "url": "https://youtube.com/..."
-        },
-        {
-          "name": "Blog",
-          "url": "https://medium.com/..."
         }
       ]
     },
@@ -127,27 +133,22 @@
         "JSON"
       ],
       "points": [
-        "Developed runtime workstation systems and VR factory interactions.",
-        "Designed JSON-based persistence architecture.",
-        "Integrated the application into the VIROO cloud platform."
+        "Implement a factory system in Unity with a runtime workstation and tool creation",
+        "Design a data export model for user state tracking and persistence (JSON-based)",
+        "Initiate a structured architecture following the SOLID principle.",
+        "Lead and supervise junior contributors under high-pressure development conditions",
+        "Collaborate with the client during optimization and testing phases",
+        "Integrate the Unity VR-based project into the cloud platform (VIROO)"
       ],
       "links": [
         {
-          "name": "Showcase",
-          "url": "https://example.com/showcase"
-        },
-        {
-          "name": "Video",
-          "url": "https://youtube.com/..."
-        },
-        {
           "name": "Blog",
-          "url": "https://medium.com/..."
+          "url": "https://helsinkixrcenter.com/news/hxrc-team-designing-a-user-friendly-factory-layout-tool-in-vr/"
         }
       ]
     },
     {
-      "title": "ENPA (City Data Integration)",
+      "title": "ENPA (Kaupunkidata – City Data Integration)",
       "technologies": [
         "React",
         "Mapbox",
@@ -156,22 +157,15 @@
         "GIS"
       ],
       "points": [
-        "Evaluate the technical approach for GIS development and continuation and evaluated suitable visualization frameworks.",
-        "Reviewed code and mentored trainee developer throughout development.",
-        "Implemented prototype components for energy data visualization and integration testing."
+        "Integrate geospatial datasets into XR digital twin systems using API-driven workflows.",
+        "Work with Mapbox SDK for spatial visualization and interaction in WebGL environments.",
+        "Develop data pipelines for aggregating environmental and energy datasets",
+        "Build and develop data pipelines for aggregating energy data (daily, weekly, monthly)."
       ],
       "links": [
         {
-          "name": "Showcase",
+          "name": "Visit Website",
           "url": "https://xrdev.edu.metropolia.fi/kaupunkidata/"
-        },
-        {
-          "name": "Video",
-          "url": "https://youtube.com/..."
-        },
-        {
-          "name": "Blog",
-          "url": "https://helsinkixrcenter.com/news/hxrc-team-data-visualisation-in-urban-setting-part-2-leppavaara-expansion/"
         }
       ]
     },
@@ -185,8 +179,8 @@
         "Geocoding"
       ],
       "points": [
-        "Developed 3D city visualization for Meta Quest using Mapbox.",
-        "Integrated geospatial data with in-house infrastructure and geocoding services."
+        "Work with the Mapbox SDK for 3D city visualization and interaction in Meta Quest 3.",
+        "Integrate Mapbox-generated 3D data into in-house infrastructure, including geocoding, to local function within XR environments."
       ],
       "links": [
         {
@@ -204,7 +198,7 @@
       ]
     },
     {
-      "title": "Virtual Learning Platform (VLL)",
+      "title": "VLL (Virtual Learning Platform)",
       "technologies": [
         "NestJS",
         "Unity",
@@ -214,9 +208,10 @@
         "C#"
       ],
       "points": [
-        "Developed backend services with NestJS and shared SDKs.",
-        "Implemented classroom systems, Photon Fusion multiplayer, and AI-driven NPC interactions.",
-        "Integrated Convai dialogue with finite state machines."
+        "Develop full-stack features across backend (NestJS), client applications (student/teacher), and shared in-house SDK systems.",
+        "Implement classroom management systems and APIs supporting interactions.",
+        "Integrate multiplayer functionality using Photon Fusion for live classroom scenarios.",
+        "Build FSM NPC systems and integrate with the Convai conversation tool, connecting dialogue with state machines and contextual behavior."
       ],
       "links": [
         {
@@ -236,106 +231,77 @@
   ],
   "skills": [
     {
-      "name": "Programming Languages",
+      "name": "Game Development",
       "items": [
         "C#",
-        "C++",
-        "TypeScript",
-        "Python",
-        "JavaScript",
-        "Bash"
-      ]
-    },
-    {
-      "name": "XR & Game Development",
-      "items": [
-        "Unity",
-        "OpenXR",
-        "XR Interaction Toolkit",
+        "Unity (UI Toolkit,uGUI, Editor)",
+        "HLSL/GLSL",
         "Photon Fusion",
-        "Meta Quest",
-        "Unreal Engine 5"
+        "Firebase",
+        "Mobile game development (Android)",
+        "Addressable assets",
+        "Dotween",
+        "Convai",
+        "Animation pipelines"
       ]
     },
     {
       "name": "Backend",
       "items": [
-        "NestJS",
-        "FastAPI",
+        "Python",
         "Flask",
-        "REST API",
-        "JSON",
-        "gRPC"
+        "NestJs",
+        "OpenAPI",
+        "REST API design",
+        "async services",
+        "Data processing",
+        "ETL logic"
       ]
     },
     {
-      "name": "GIS & Data",
+      "name": "Mobile / Platform (Familiarity)",
       "items": [
-        "Mapbox",
-        "Digital Twin",
-        "Geospatial Data",
-        "Data Pipelines",
-        "ETL"
+        "Android fundamentals",
+        "Mobile SDK concepts"
       ]
     },
     {
       "name": "Databases",
       "items": [
-        "PostgreSQL",
-        "MySQL"
+        "Relational DB: PostgreSQL and MySQL"
       ]
     },
     {
       "name": "Frontend",
       "items": [
-        "React",
-        "Vue",
-        "UniRx"
+        "React / TypeScript",
+        "Component-based UI architecture",
+        "state management",
+        "API-driven UIs"
       ]
     },
     {
-      "name": "DevOps",
+      "name": "DevOps / Cloud",
       "items": [
         "Docker",
         "Docker Compose",
-        "Linux",
-        "GitHub Actions",
+        "Kubernetes",
+        "Linux environments(Ubuntu)",
+        "CI/CD: GitHub Actions",
         "GitLab CI",
-        "Kubernetes"
-      ]
-    },
-    {
-      "name": "Graphics",
-      "items": [
-        "OpenGL",
-        "GLSL",
-        "HLSL",
-        "Computer Graphics"
-      ]
-    },
-    {
-      "name": "AI",
-      "items": [
-        "ChatGPT",
-        "Convai",
-        "Prompt Engineering",
-        "LLM Integration"
+        "Basic AWS knowledge (S3, EC2, Lambda concepts)"
       ]
     }
   ],
   "languages": [
     {
       "name": "English",
-      "level": "C2 (Native)"
+      "level": "C2 – fluent"
     },
     {
       "name": "Finnish",
-      "level": "B1"
-    },
-    {
-      "name": "Estonian",
-      "level": "A1"
+      "level": "A2 – basic working"
     }
   ],
-  "pdfUrl": "./assets/Alicia Pankka-CV-2026.3.pdf"
+  "pdfUrl": "./assets/Alicia Pankka-CV-2026.4.pdf"
 }
