@@ -36,6 +36,16 @@
 .site-title .roles .accent {
   color: #cc5500;
 }
+.site-title .roles a {
+  text-decoration: none;
+}
+.site-title .roles a:not(.accent) {
+  color: var(--link);
+}
+.site-title .roles a:hover,
+.site-title .roles a:focus-visible {
+  text-decoration: underline;
+}
 
 .visitor-box {
   margin-left: auto;
@@ -75,6 +85,51 @@
 }
 .odometer span:nth-child(odd) {
   background: #111;
+}
+
+/* ---- Navigation bar (a panel on phones, part of the header on tablet/desktop) ---- */
+.nav-bar {
+  padding: 10px 10px 0;
+}
+.nav-bar .nav-panel {
+  margin-bottom: 0;
+}
+.nav-bar .nav-panel h2 {
+  margin-bottom: 6px;
+}
+.nav-bar .nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 18px;
+}
+.nav-bar .nav-list li {
+  padding: 3px 0;
+  gap: 6px;
+}
+@media (min-width: 561px) {
+  .site-header {
+    border-bottom: none;
+    padding-bottom: 10px;
+  }
+  .nav-bar {
+    padding: 0 20px 8px;
+    background: var(--bg);
+    border-bottom: 2px solid var(--border-dark);
+  }
+  .nav-bar .nav-panel {
+    border: none;
+    border-top: 1px solid var(--border-mid);
+    padding: 8px 0 0;
+  }
+  .nav-bar .nav-panel h2 {
+    display: none;
+  }
+  .nav-bar .nav-list {
+    gap: 2px 26px;
+  }
+  .nav-bar .nav-list .icon {
+    display: none;
+  }
 }
 
 /* ---- 3-column layout ---- */
@@ -150,10 +205,6 @@ body.crt-on {
   .sidebar-left {
     display: contents;
   }
-  .nav-panel {
-    order: 0;
-    margin-bottom: 0;
-  }
   .layout > main {
     order: 1;
   }
@@ -164,23 +215,17 @@ body.crt-on {
   .layout > .sidebar-right {
     order: 3;
   }
-  .nav-panel h2 {
-    margin-bottom: 6px;
+  /* Tablet: logo, title and visitor counter stay on one row */
+  .site-title {
+    flex: 1;
+    min-width: 0;
   }
-  .nav-panel .nav-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px 18px;
+  .site-title h1 {
+    font-size: clamp(24px, 3.4vw, 34px);
+    letter-spacing: 2px;
   }
-  .nav-panel .nav-list li {
-    padding: 3px 0;
-    gap: 6px;
-  }
-  .site-header {
-    flex-wrap: wrap;
-  }
-  .visitor-box {
-    margin-left: 0;
+  .site-title .roles {
+    font-size: 15px;
   }
   .projects-grid {
     grid-template-columns: 1fr 1fr;
@@ -203,6 +248,37 @@ body.crt-on {
   }
   .site-title .roles {
     font-size: 15px;
+  }
+  /* Phone: first row is logo left, visitor counter right. Title wraps below. */
+  .site-header {
+    flex-wrap: wrap;
+    row-gap: 5px;
+    padding-top: 10px;
+  }
+  .logo {
+    order: -3;
+  }
+  .visitor-box {
+    order: -2;
+    padding: 6px 8px;
+  }
+  .site-header::after {
+    content: "";
+    order: -1;
+    flex-basis: 100%;
+    height: 0;
+  }
+  .visitor-box .label {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  .visitor-box .visitors-icon {
+    font-size: 18px;
+    margin-left: 6px;
+  }
+  .odometer span {
+    width: 15px;
+    font-size: 14px;
   }
   .site-footer {
     flex-direction: column;

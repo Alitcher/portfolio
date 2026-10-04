@@ -55,6 +55,10 @@ const topBar = el(
   ),
 );
 
+// Header roles link to their pages, matched by position in HOME.roles
+// (Unity3D, Fullstack, Computer Graphics).
+const ROLE_ROUTES: readonly string[] = ["#/xr", "#/backend", "#/graphics"];
+
 // Start at 0 when a real count will load from the server, so we never flash the
 // local seed; the offline fallback keeps the retro seed for a "lived-in" look.
 const counterMount = visitorCounter(config.useRemoteApi || config.useRemoteCounter ? 0 : 1327);
@@ -71,8 +75,9 @@ const header = el(
       { class: "roles" },
       ...HOME.roles.flatMap((role, i) => {
         const isLast = i === HOME.roles.length - 1;
-        const node = isLast ? el("span", { class: "accent" }, role) : `${role} `;
-        return isLast ? [node] : [node, el("span", { class: "sep" }, "|"), " "];
+        const href = ROLE_ROUTES[i];
+        const node = el(href ? "a" : "span", { class: isLast ? "accent" : "", href }, role);
+        return isLast ? [node] : [node, " ", el("span", { class: "sep" }, "|"), " "];
       }),
     ),
   ),
@@ -85,6 +90,7 @@ const header = el(
   ),
 );
 
+const navBar = el("div", { class: "nav-bar" });
 const leftSidebar = el("aside", { class: "sidebar-left" });
 const layout = el("div", { class: "layout" }, leftSidebar);
 const footer = statusBar(__LAST_UPDATED__);
@@ -92,7 +98,7 @@ const crtOverlay = el("div", { class: "crt-overlay", attrs: { "aria-hidden": "tr
 
 clear(app);
 app.removeAttribute("aria-busy");
-app.append(topBar, header, layout, footer, crtOverlay);
+app.append(topBar, header, navBar, layout, footer, crtOverlay);
 
 // ---- Routing ----------------------------------------------------------------
 
@@ -110,10 +116,12 @@ const router = new Router()
   .setNotFound(() => notFound());
 
 router.start((node, ctx) => {
-  // Refresh the left sidebar (nav highlight) and swap the page region.
+  // Refresh the nav highlight and left sidebar, then swap the page region.
   const route = "#" + ctx.path;
+  clear(navBar);
+  navBar.append(navMenu(route));
   clear(leftSidebar);
-  leftSidebar.append(navMenu(route), statusPanel(), systemInfoPanel());
+  leftSidebar.append(statusPanel(), systemInfoPanel());
 
   // Remove everything after the persistent left sidebar, then mount the page.
   while (layout.children.length > 1) layout.lastElementChild!.remove();

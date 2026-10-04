@@ -12,9 +12,6 @@ export interface MenuItem {
 export const NAV_ITEMS: readonly MenuItem[] = [
   { icon: "&#127968;", label: "Home", route: "#/" },
   { icon: "&#128193;", label: "Projects", route: "#/projects" },
-  { icon: "&#129405;", label: "Unity XR", route: "#/xr" },
-  { icon: "&#128421;", label: "Backend", route: "#/backend" },
-  { icon: "&#127912;", label: "Computer Graphics", route: "#/graphics" },
   { icon: "&#128221;", label: "Blog / Notes", route: "#/blog" },
   { icon: "&#128196;", label: "Resume", route: "#/resume" },
   { icon: "&#9993;", label: "Contact Me", route: "#/contact" },
