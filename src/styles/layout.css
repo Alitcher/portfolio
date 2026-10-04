@@ -215,6 +215,15 @@ body.crt-on {
   .layout > .sidebar-right {
     order: 3;
   }
+  /* Tablet and phone: title bar shows only the date and time */
+  .app-titlebar {
+    justify-content: center;
+  }
+  .app-titlebar > span:first-child,
+  .app-titlebar .crt-toggle,
+  .app-titlebar .win-controls {
+    display: none;
+  }
   /* Tablet: logo, title and visitor counter stay on one row */
   .site-title {
     flex: 1;
