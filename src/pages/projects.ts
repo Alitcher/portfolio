@@ -51,7 +51,7 @@ export async function projectsPage(): Promise<Node> {
   renderGrid("all");
 
   const win = windowEl(
-    { title: ":: PROJECTS ::", controls: [] },
+    { title: ":: PROJECTS ::", className: "blue-titlebar", controls: [] },
     el("p", { class: "page-intro" }, "A selection of things I've built across XR, backend and graphics. Filter by area:"),
     filterBar,
     grid,
@@ -66,7 +66,7 @@ export async function projectDetailPage(slug: string): Promise<Node> {
   if (!project) {
     return pageRegion(
       windowEl(
-        { title: ":: PROJECT NOT FOUND ::", controls: [] },
+        { title: ":: PROJECT NOT FOUND ::", className: "blue-titlebar", controls: [] },
         el("p", {}, "That project doesn't exist."),
         backLink("#/projects", "Back to Projects"),
       ),
@@ -107,7 +107,7 @@ export async function projectDetailPage(slug: string): Promise<Node> {
     linksRow(project),
   );
 
-  const win = windowEl({ title: `:: ${project.title.toUpperCase()} ::`, controls: [] }, ...parts);
+  const win = windowEl({ title: `:: ${project.title.toUpperCase()} ::`, className: "blue-titlebar", controls: [] }, ...parts);
 
   return pageRegion(win);
 }

@@ -2,7 +2,7 @@
   "systemInfo": [
     {
       "label": "OS",
-      "value": "Windows 98"
+      "value": "Windows 95"
     },
     {
       "label": "Editor",
@@ -15,6 +15,10 @@
     {
       "label": "Language",
       "value": "C#, C++, Python, TS, JS, Java, Latex, GLSL, HLSL"
+    },
+    {
+      "label": "AI Model",
+      "value": "Claude Opus 5.5, Gemini 3, gpt-oss-20b, Groq"
     }
   ],
   "coffeeLevel": 77,

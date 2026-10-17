@@ -54,7 +54,7 @@ export async function contactPage(): Promise<Node> {
   );
 
   const win = windowEl(
-    { title: ":: CONTACT ME ::", controls: [] },
+    { title: ":: CONTACT ME ::", className: "blue-titlebar", controls: [] },
     el("p", { class: "page-intro" }, "Got a question, an idea, or an opportunity? Drop me a line."),
     el("div", { class: "contact-grid" }, infoPanel, form),
   );

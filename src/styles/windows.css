@@ -65,8 +65,10 @@
   letter-spacing: 1px;
   font-size: 13px;
 }
-/* Windows that can be minimized get the blue title bar, like the top bar. */
-.window > .titlebar:has(.win-btn[aria-expanded]) {
+/* Windows that can be minimized get the blue title bar, like the top bar.
+   Other windows opt in with the "blue-titlebar" class. */
+.window > .titlebar:has(.win-btn[aria-expanded]),
+.window.blue-titlebar > .titlebar {
   background: var(--titlebar);
   color: var(--titlebar-text);
 }

@@ -16,7 +16,7 @@ export async function resumePage(): Promise<Node> {
   );
 
   const win = windowEl(
-    { title: ":: RESUME ::", controls: [] },
+    { title: ":: RESUME ::", className: "blue-titlebar", controls: [] },
     el("div", { class: "resume-head" },
       el("div", {}, el("h3", {}, config.siteOwner),
         el("p", { class: "muted" }, "Unity XR Developer · Backend Developer · Computer Graphics")),

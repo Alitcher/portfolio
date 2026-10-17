@@ -30,7 +30,7 @@ export async function blogPage(): Promise<Node> {
     ),
   );
 
-  return pageRegion(windowEl({ title: ":: BLOG / NOTES ::", controls: [] },
+  return pageRegion(windowEl({ title: ":: BLOG / NOTES ::", className: "blue-titlebar", controls: [] },
     el("p", { class: "page-intro" }, "Technical notes on XR, graphics and backend systems."),
     list,
   ));
@@ -43,7 +43,7 @@ export async function blogPostPage(slug: string): Promise<Node> {
   const post = index >= 0 ? posts[index] : undefined;
 
   if (!post) {
-    return pageRegion(windowEl({ title: ":: POST NOT FOUND ::", controls: [] },
+    return pageRegion(windowEl({ title: ":: POST NOT FOUND ::", className: "blue-titlebar", controls: [] },
       el("p", {}, "That article doesn't exist."),
       backLink("#/blog", "Back to Blog"),
     ));
@@ -72,7 +72,7 @@ export async function blogPostPage(slug: string): Promise<Node> {
     el("div", { class: "markdown", html: renderMarkdown(post.body) }),
   );
 
-  return pageRegion(windowEl({ title: `:: ${post.title.toUpperCase()} ::`, controls: [] },
+  return pageRegion(windowEl({ title: `:: ${post.title.toUpperCase()} ::`, className: "blue-titlebar", controls: [] },
     backLink("#/blog", "Back to Blog"),
     article,
     nav,
