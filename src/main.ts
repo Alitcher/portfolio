@@ -65,7 +65,7 @@ const counterMount = visitorCounter(config.useRemoteApi || config.useRemoteCount
 const header = el(
   "header",
   { class: "site-header" },
-  logoSvg(),
+  logo(),
   el(
     "div",
     { class: "site-title" },
@@ -162,19 +162,6 @@ function notFound(): Node {
   return wrap;
 }
 
-function logoSvg(): SVGElement {
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("class", "logo");
-  svg.setAttribute("viewBox", "0 0 90 90");
-  svg.setAttribute("aria-hidden", "true");
-  svg.innerHTML = `
-    <g stroke="#000" stroke-width="2" fill="#B0B0B0">
-      <rect x="14" y="18" width="26" height="26"/>
-      <polygon points="14,18 24,8 50,8 40,18" fill="#D8D8D8"/>
-      <polygon points="40,18 50,8 50,34 40,44" fill="#888"/>
-    </g>
-    <line x1="58" y1="6" x2="58" y2="74" stroke="#0A0" stroke-width="3"/>
-    <line x1="6" y1="74" x2="84" y2="74" stroke="#00F" stroke-width="3"/>
-    <line x1="58" y1="74" x2="80" y2="52" stroke="#F00" stroke-width="3"/>`;
-  return svg;
+function logo(): HTMLImageElement {
+  return el("img", { class: "logo", src: "./assets/logo.png", alt: "" });
 }

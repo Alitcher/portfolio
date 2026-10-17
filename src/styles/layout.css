@@ -14,9 +14,10 @@
   box-shadow: 0 2px 0 var(--border-light) inset;
 }
 .logo {
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
   flex-shrink: 0;
+  object-fit: cover;
   image-rendering: pixelated;
 }
 .site-title h1 {
@@ -116,10 +117,12 @@
     background: var(--bg);
     border-bottom: 2px solid var(--border-dark);
   }
+  /* Line the links and divider up with the site title: logo width (120px) + header gap (20px). */
   .nav-bar .nav-panel {
     border: none;
     border-top: 1px solid var(--border-mid);
     padding: 8px 0 0;
+    margin-left: 140px;
   }
   .nav-bar .nav-panel h2 {
     display: none;
