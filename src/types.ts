@@ -131,7 +131,6 @@ export interface HomeContent {
     readonly focusLead: string;
     /** Bullet points under the "focusing on" heading. */
     readonly focus: readonly string[];
-    readonly poweredBadgeHtml: string;
   };
   readonly techStack: readonly StackItem[];
   readonly links: readonly HomeLink[];

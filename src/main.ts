@@ -86,7 +86,6 @@ const header = el(
     { class: "visitor-box raised" },
     el("div", { class: "label" }, "You are visitor number:"),
     counterMount,
-    el("span", { class: "visitors-icon", html: "&#128101;" }),
   ),
 );
 

@@ -1,6 +1,7 @@
 import { el } from "./dom.js";
 import { initMusic, togglePlay, toggleMute, onMusicChange } from "./music-player.js";
 import { SIDEBAR } from "../services/data/sidebar.js";
+import coffeeIcon from "../assets/coffee.svg";
 
 type StatusTone = "coding" | "food" | "dinner" | "sleeping";
 
@@ -82,7 +83,7 @@ export function systemInfoPanel(): HTMLElement {
     el(
       "div",
       { class: "coffee-row" },
-      el("span", { html: "&#9749;" }),
+      el("img", { class: "coffee-icon", attrs: { src: coffeeIcon, alt: "", width: "20", height: "20" } }),
       el("div", { class: "coffee-bar sunken" }, coffeeFill),
       el("span", {}, `${coffee}%`),
     ),

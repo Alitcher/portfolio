@@ -43,6 +43,11 @@
   gap: 8px;
   margin: 4px 0 8px;
 }
+.coffee-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
 .coffee-bar {
   flex: 1;
   height: 16px;
@@ -120,23 +125,6 @@
 }
 .focus-lead {
   margin-top: 12px;
-}
-.welcome-side {
-  width: 190px;
-  flex-shrink: 0;
-  text-align: center;
-}
-.welcome-side .pc-art {
-  font-size: 96px;
-  line-height: 1;
-  filter: grayscale(0.2);
-}
-.powered-badge {
-  margin-top: 10px;
-  background: var(--win-bg-alt);
-  padding: 8px;
-  font-weight: bold;
-  display: inline-block;
 }
 
 /* ---- Project cards + thumbnails ---- */

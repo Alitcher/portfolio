@@ -141,8 +141,10 @@
   text-align: left;
 }
 .ai-left .robot {
-  font-size: 64px;
-  line-height: 1;
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
 }
 .ai-left .ai-name {
   font-weight: bold;

@@ -23,12 +23,6 @@ export async function homePage(): Promise<Node> {
       el("p", { class: "focus-lead" }, HOME.welcome.focusLead),
       el("ul", {}, ...HOME.welcome.focus.map((item) => el("li", {}, item))),
     ),
-    el(
-      "div",
-      { class: "welcome-side" },
-      el("div", { class: "pc-art", html: "&#128421;&#65039;", attrs: { "aria-hidden": "true" } }),
-      el("div", { class: "powered-badge raised", html: HOME.welcome.poweredBadgeHtml }),
-    ),
   );
 
   const projectsWindow = windowEl(

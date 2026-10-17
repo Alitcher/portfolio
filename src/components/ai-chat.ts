@@ -12,6 +12,7 @@ import {
   lastAnswerWasOffline,
 } from "../services/chat-quota.js";
 import { config } from "../config.js";
+import robotIcon from "../assets/robot.svg";
 import type { ChatMessage } from "../types.js";
 // Only the JSON, not ../ai/persona.ts: that builds the AI's prompt, which the page doesn't need.
 import personaContent from "../content/persona.json";
@@ -193,7 +194,7 @@ export function aiChat(): HTMLElement {
     el(
       "div",
       { class: "ai-left" },
-      el("div", { class: "robot", html: "&#129302;", attrs: { "aria-hidden": "true" } }),
+      el("img", { class: "robot", attrs: { src: robotIcon, alt: "", width: "64", height: "64" } }),
       el("div", { class: "ai-name" }, AI_NAME),
       el("div", { class: "ai-desc", html: chatBox.description.map(escapeHtml).join("<br>") }),
       onlineEl,
