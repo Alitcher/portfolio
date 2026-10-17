@@ -159,7 +159,9 @@
   color: #e0218a;
 }
 
-/* ---- CRT scanline overlay (toggled via body.crt-on) ---- */
+/* ---- CRT scanline overlay (toggled via html.crt-on) ----
+   The class and filter sit on <html>, not <body>: a filter on body would trap
+   the fixed overlay inside the body box and leave the side background out. */
 .crt-overlay {
   display: none;
   position: fixed;
@@ -167,7 +169,7 @@
   pointer-events: none;
   z-index: 9999;
 }
-body.crt-on .crt-overlay {
+html.crt-on .crt-overlay {
   display: block;
   background: repeating-linear-gradient(
     to bottom,
@@ -177,17 +179,17 @@ body.crt-on .crt-overlay {
     transparent 3px
   );
 }
-body.crt-on .crt-overlay::after {
+html.crt-on .crt-overlay::after {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 0, 0, 0.35) 100%);
 }
-body.crt-on {
+html.crt-on {
   filter: saturate(1.15) contrast(1.05);
 }
 @media (prefers-reduced-motion: reduce) {
-  body.crt-on {
+  html.crt-on {
     filter: none;
   }
 }

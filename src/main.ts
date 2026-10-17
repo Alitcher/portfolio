@@ -34,7 +34,7 @@ const crtToggle = el("button", {
   title: "Toggle CRT scanline mode",
   attrs: { "aria-label": "Toggle CRT mode", type: "button" },
 }, "CRT");
-crtToggle.addEventListener("click", () => document.body.classList.toggle("crt-on"));
+crtToggle.addEventListener("click", () => document.documentElement.classList.toggle("crt-on"));
 
 const topBar = el(
   "div",

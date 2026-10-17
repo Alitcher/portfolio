@@ -28,7 +28,8 @@
 }
 
 html {
-  background: #808080;
+  /* Classic Windows desktop teal. */
+  background: #008080;
 }
 
 body {
