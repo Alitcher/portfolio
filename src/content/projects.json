@@ -48,7 +48,7 @@
       "vcpkg"
     ],
     "links": {
-      "github": "https://github.com/",
+      "github": "https://github.com/Alitcher/escaperoom-gl",
       "demo": ""
     },
     "featured": true,
@@ -124,5 +124,28 @@
     "screenshot": "./assets/screenshots/unity-games-itch.jpg",
     "thumbTheme": "aistart",
     "thumbLabel": "UNITY"
+  },
+  {
+    "slug": "occupational-therapy",
+    "title": "Occupational Therapy",
+    "category": "xr",
+    "summary": "An XR occupational therapy scenario in VLL, our Virtual Learning Platform.",
+    "overview": "One of the many XR scenarios in VLL, our Virtual Learning Platform. I worked on full-stack features across the NestJS backend, the student and teacher apps and our shared SDK, multiplayer classrooms with Photon Fusion, and NPC characters driven by state machines and Convai conversations. The project is confidential, so only the video is shared.",
+    "tech": [
+      "Unity",
+      "C#",
+      "NestJS",
+      "TypeScript",
+      "Photon Fusion",
+      "Convai"
+    ],
+    "links": {
+      "github": "",
+      "demo": ""
+    },
+    "featured": false,
+    "screenshot": "./assets/screenshots/occupational-therapy.jpg",
+    "thumbTheme": "factory",
+    "thumbLabel": "VR"
   }
 ]

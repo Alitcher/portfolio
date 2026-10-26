@@ -3,7 +3,8 @@ import { escapeHtml } from "../components/dom.js";
 /**
  * A deliberately tiny, dependency-free Markdown -> HTML renderer. It supports the
  * subset used by the blog and project write-ups: headings, bold/italic/inline-code,
- * links, images, YouTube embeds (a line with only the video URL), blockquotes,
+ * links, images, YouTube / Google Drive video embeds (a line with only the
+ * video URL), blockquotes,
  * unordered and ordered lists, horizontal rules and paragraphs.
  *
  * Everything is HTML-escaped first, so raw markdown can never inject markup.
@@ -55,6 +56,17 @@ export function renderMarkdown(md: string): string {
         `<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}" ` +
           `title="YouTube video" loading="lazy" allowfullscreen ` +
           `allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>`,
+      );
+      continue;
+    }
+
+    // Same for a Google Drive file link: embed Drive's own player by file id.
+    const drive = /^https:\/\/drive\.google\.com\/file\/d\/([\w-]{20,})\/\S*$/.exec(line.trim());
+    if (drive) {
+      flushParagraph(); closeLists();
+      out.push(
+        `<div class="video-embed"><iframe src="https://drive.google.com/file/d/${drive[1]}/preview" ` +
+          `title="Video" loading="lazy" allowfullscreen allow="autoplay; fullscreen"></iframe></div>`,
       );
       continue;
     }
