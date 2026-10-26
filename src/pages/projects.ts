@@ -140,7 +140,5 @@ function linksRow(project: Project): HTMLElement {
   if (project.links.demo)
     row.appendChild(el("a", { class: "link-btn", href: project.links.demo },
       el("span", { class: "lb-icon lb-in", html: "&#9658;" }), " Live Demo"));
-  if (!project.links.github && !project.links.demo)
-    row.appendChild(el("p", { class: "muted" }, "Source and demo links coming soon."));
   return row;
 }
