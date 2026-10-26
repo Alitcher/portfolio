@@ -4,6 +4,7 @@ date: 2026-06-02
 readingMinutes: 6
 summary: Why message queues tame distributed systems, and the patterns I reach for with RabbitMQ.
 tags: [backend, rabbitmq, distributed-systems]
+draft: true
 ---
 
 # RabbitMQ for Distributed Systems

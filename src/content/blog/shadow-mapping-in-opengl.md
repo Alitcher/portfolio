@@ -4,6 +4,7 @@ date: 2026-06-10
 readingMinutes: 8
 summary: A practical walkthrough of shadow mapping, from the depth pass to fixing acne and peter-panning.
 tags: [graphics, opengl, rendering]
+draft: true
 ---
 
 # Shadow Mapping in OpenGL

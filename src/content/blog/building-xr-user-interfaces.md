@@ -4,6 +4,7 @@ date: 2026-06-24
 readingMinutes: 6
 summary: Lessons on designing UI that stays readable and comfortable inside a headset.
 tags: [xr, unity, ui]
+draft: true
 ---
 
 # Building XR User Interfaces

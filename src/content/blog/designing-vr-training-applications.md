@@ -4,6 +4,7 @@ date: 2026-06-18
 readingMinutes: 7
 summary: How to build VR training that is measurable, repeatable and actually transfers to the real task.
 tags: [xr, vr, training]
+draft: true
 ---
 
 # Designing VR Training Applications
