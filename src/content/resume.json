@@ -172,34 +172,6 @@
       ]
     },
     {
-      "title": "Metadata to Metaverse",
-      "technologies": [
-        "Unity",
-        "Mapbox",
-        "Meta Quest 3",
-        "C#",
-        "Geocoding"
-      ],
-      "points": [
-        "Work with the Mapbox SDK for 3D city visualization and interaction in Meta Quest 3.",
-        "Integrate Mapbox-generated 3D data into in-house infrastructure, including geocoding, to local function within XR environments."
-      ],
-      "links": [
-        {
-          "name": "Showcase",
-          "url": "https://example.com/showcase"
-        },
-        {
-          "name": "Video",
-          "url": "https://youtube.com/..."
-        },
-        {
-          "name": "Blog",
-          "url": "https://medium.com/..."
-        }
-      ]
-    },
-    {
       "title": "VLL (Virtual Learning Platform)",
       "technologies": [
         "NestJS",
@@ -217,16 +189,8 @@
       ],
       "links": [
         {
-          "name": "Showcase",
-          "url": "https://example.com/showcase"
-        },
-        {
           "name": "Video",
-          "url": "https://youtube.com/..."
-        },
-        {
-          "name": "Blog",
-          "url": "https://medium.com/..."
+          "url": "https://drive.google.com/file/d/1Ve9JcGp30FHR7n4gO0Umoxp1kqeLcOp7/view?usp=sharing"
         }
       ]
     }
