@@ -196,9 +196,6 @@
   color: #444;
   margin-bottom: 6px;
 }
-.blog-article .markdown {
-  max-width: 70ch;
-}
 .markdown h1 { font-size: 24px; margin: 14px 0 8px; }
 .markdown h2 { font-size: 19px; margin: 14px 0 6px; }
 .markdown h3 { font-size: 16px; margin: 12px 0 6px; }
