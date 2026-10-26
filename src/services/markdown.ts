@@ -3,8 +3,8 @@ import { escapeHtml } from "../components/dom.js";
 /**
  * A deliberately tiny, dependency-free Markdown -> HTML renderer. It supports the
  * subset used by the blog and project write-ups: headings, bold/italic/inline-code,
- * links, images, blockquotes, unordered and ordered lists, horizontal rules and
- * paragraphs.
+ * links, images, YouTube embeds (a line with only the video URL), blockquotes,
+ * unordered and ordered lists, horizontal rules and paragraphs.
  *
  * Everything is HTML-escaped first, so raw markdown can never inject markup.
  */
@@ -43,6 +43,19 @@ export function renderMarkdown(md: string): string {
     if (/^(-{3,}|\*{3,})$/.test(line.trim())) {
       flushParagraph(); closeLists();
       out.push("<hr />");
+      continue;
+    }
+
+    // A line that is only a YouTube link becomes an embedded player. Only the
+    // 11-character video id is used, so the URL itself never reaches the HTML.
+    const yt = /^https:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})\S*$/.exec(line.trim());
+    if (yt) {
+      flushParagraph(); closeLists();
+      out.push(
+        `<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}" ` +
+          `title="YouTube video" loading="lazy" allowfullscreen ` +
+          `allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></div>`,
+      );
       continue;
     }
 
