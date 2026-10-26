@@ -2,7 +2,7 @@ import { el, clear } from "../components/dom.js";
 import { windowEl } from "../components/window.js";
 import { projectCard } from "../components/project-card.js";
 import { browserWindow } from "../components/browser-window.js";
-import { pageRegion, backLink } from "./shared.js";
+import { pageRegion, backLink, inCategory } from "./shared.js";
 import { api } from "../services/api.js";
 import { renderMarkdown } from "../services/markdown.js";
 import type { Project, ProjectCategory } from "../types.js";
@@ -22,7 +22,7 @@ export async function projectsPage(): Promise<Node> {
   const grid = el("div", { class: "projects-grid wide" });
   const renderGrid = (category: ProjectCategory | "all") => {
     clear(grid);
-    const shown = category === "all" ? projects : projects.filter((p) => p.category === category || p.alsoIn?.includes(category));
+    const shown = category === "all" ? projects : projects.filter((p) => inCategory(p, category));
     if (shown.length === 0) {
       grid.appendChild(el("p", {}, "No projects in this category yet."));
       return;

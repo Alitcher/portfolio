@@ -18,7 +18,7 @@ import type { HomeContent, Project, Resume, SidebarContent } from "../types.js";
 const HOME = home as HomeContent;
 const SIDEBAR = sidebar as SidebarContent;
 const RESUME = resume as Resume;
-const PROJECTS = projects as readonly Project[];
+const PROJECTS = (projects as readonly Project[]).filter((p) => !p.draft);
 
 const CATEGORY_NAMES: Record<string, string> = {
   xr: "Unity XR",

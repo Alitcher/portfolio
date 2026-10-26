@@ -14,7 +14,9 @@ const files = import.meta.glob("../../content/blog/*.md", {
   eager: true,
 }) as Record<string, string>;
 
+/** Posts with `draft: true` in their frontmatter are left out until written. */
 export const BLOG_POSTS: readonly BlogPost[] = Object.entries(files)
+  .filter(([, raw]) => !/^draft:\s*true\s*$/m.test(raw.split(/\n---\s*\n/)[0]))
   .map(([path, raw]) => parsePost(path, raw))
   .sort((a, b) => (a.date < b.date ? 1 : -1));
 

@@ -19,6 +19,10 @@ export interface Project {
   readonly category: ProjectCategory;
   /** Extra focus pages / filters this project also shows up in. */
   readonly alsoIn?: readonly ProjectCategory[];
+  /** Focus pages / filters to hide this project from, even its own category. */
+  readonly hiddenFrom?: readonly ProjectCategory[];
+  /** True while unwritten: the project is left out of the whole site. */
+  readonly draft?: boolean;
   /** Short one-liner used on cards. */
   readonly summary: string;
   /** Plain-text overview used by cards, search and the assistant. */

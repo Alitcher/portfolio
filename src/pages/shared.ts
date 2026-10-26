@@ -1,4 +1,5 @@
 import { el } from "../components/dom.js";
+import type { Project, ProjectCategory } from "../types.js";
 
 /**
  * Assemble a page's grid region: a `<main>` column plus an optional right
@@ -39,4 +40,10 @@ export function formatDate(iso: string): string {
   const [y, m, d] = iso.split("-").map(Number);
   if (!y || !m || !d) return iso;
   return `${months[m - 1]} ${d}, ${y}`;
+}
+
+/** True if a project belongs on the given focus page / filter. */
+export function inCategory(p: Project, category: ProjectCategory): boolean {
+  if (p.hiddenFrom?.includes(category)) return false;
+  return p.category === category || (p.alsoIn?.includes(category) ?? false);
 }

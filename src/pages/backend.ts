@@ -1,14 +1,12 @@
 import { el } from "../components/dom.js";
 import { windowEl } from "../components/window.js";
 import { projectCard } from "../components/project-card.js";
-import { pageRegion } from "./shared.js";
+import { pageRegion, inCategory } from "./shared.js";
 import { api } from "../services/api.js";
 
 /** Backend development focus page. */
 export async function backendPage(): Promise<Node> {
-  const projects = (await api.getProjects()).filter(
-    (p) => p.category === "backend" || p.alsoIn?.includes("backend"),
-  );
+  const projects = (await api.getProjects()).filter((p) => inCategory(p, "backend"));
 
   const win = windowEl(
     { title: ":: BACKEND DEVELOPMENT ::", controls: [] },

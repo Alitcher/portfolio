@@ -28,8 +28,8 @@ const bodyBySlug = new Map<string, string>(
  */
 const PROJECT_META = projectMeta as readonly Project[];
 
-/** Metadata with each project's Markdown body merged in by slug. */
-export const PROJECTS: readonly Project[] = PROJECT_META.map((p) => {
+/** Metadata with each project's Markdown body merged in by slug. Drafts are left out. */
+export const PROJECTS: readonly Project[] = PROJECT_META.filter((p) => !p.draft).map((p) => {
   const body = bodyBySlug.get(p.slug);
   return body ? { ...p, body } : p;
 });
