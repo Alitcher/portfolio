@@ -56,8 +56,9 @@ const topBar = el(
 );
 
 // Header roles link to their pages, matched by position in HOME.roles
-// (Unity3D, Fullstack, Computer Graphics).
-const ROLE_ROUTES: readonly string[] = ["#/xr", "#/backend", "#/graphics"];
+// (Unity3D, Fullstack, Computer Graphics). "" = plain text, no link; the XR
+// page is a draft until its write-ups exist.
+const ROLE_ROUTES: readonly string[] = ["", "#/backend", "#/graphics"];
 
 // Start at 0 when a real count will load from the server, so we never flash the
 // local seed; the offline fallback keeps the retro seed for a "lived-in" look.

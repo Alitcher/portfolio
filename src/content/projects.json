@@ -102,5 +102,27 @@
     "featured": false,
     "thumbTheme": "backend",
     "thumbLabel": "BUS"
+  },
+  {
+    "slug": "unity-games-itch",
+    "title": "Unity Games on itch.io",
+    "category": "xr",
+    "summary": "Four small Unity games I developed, playable in the browser.",
+    "overview": "A collection of four small games I developed in Unity, all playable in the browser on itch.io: a Color Switch clone made as a recruitment coding task for HXRC, KebabLala, a kebab shop simulation started at Ludum Dare 53, Grove Dome for the B&W Game Jam 2022, and Always: Starry Sky, a merge puzzle game from 2021. I was the developer on every one of them.",
+    "tech": [
+      "Unity",
+      "C#",
+      "WebGL",
+      "Android",
+      "Windows"
+    ],
+    "links": {
+      "github": "",
+      "demo": "https://alitchee.itch.io/"
+    },
+    "featured": false,
+    "screenshot": "./assets/screenshots/unity-games-itch.jpg",
+    "thumbTheme": "aistart",
+    "thumbLabel": "UNITY"
   }
 ]

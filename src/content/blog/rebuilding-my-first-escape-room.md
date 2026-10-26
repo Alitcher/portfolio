@@ -22,6 +22,11 @@ team, and even harder to ask for help when I was stuck. So I stayed quiet,
 the problems got bigger, and in the end everything went bad. The game we
 handed in was nothing like the one I had imagined.
 
+We made that first version in Unity. Here is the video of it,
+"TheWallerFamily: First year student team project using Unity":
+
+https://www.youtube.com/watch?v=uh4arCVpzZw
+
 For a long time it was just a project I did not want to think about.
 
 ## Why try again
@@ -31,8 +36,8 @@ TypeScript, built things in Unity and Unreal, and worked on real projects with
 other people. I have also become much better at explaining what I am doing.
 
 So I wanted to go back to that escape room and do it properly this time. Not
-as a quick game in an existing engine, but by building the engine myself in
-C++ and OpenGL. It is a way to show myself how far I have come.
+as a quick game in an existing engine like Unity, but by building the engine
+myself in C++ and OpenGL. It is a way to show myself how far I have come.
 
 ## What it is now
 
