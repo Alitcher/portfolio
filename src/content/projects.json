@@ -61,18 +61,23 @@
     "title": "Flair UE5 Thesis",
     "category": "graphics",
     "summary": "My master thesis defended in 2024.",
-    "overview": "A from-scratch real-time rendering engine written in modern C++ and OpenGL. It implements a deferred pipeline with physically based shading, shadow mapping, SSAO and bloom, and doubles as a testbed for graphics techniques.",
+    "overview": "My master's thesis at the University of Tartu, made for Artineering. I built the first version of Flair, Artineering's non-photorealistic rendering (NPR) toolset from Maya, for Unreal Engine 5: a C++ Slate shelf, Qt dialogs talking to UE5 through its Python API, and HLSL ports of Flair's shaders. Artists can apply style and material presets like Blur, Cel, Sobel and Pixel without writing shaders, and five usability tests with UE5 artists and developers confirmed the design.",
     "tech": [
+      "Unreal Engine 5",
       "C++",
-      "Unreal Engine",
+      "Slate",
+      "Python",
+      "Qt (PySide2)",
       "HLSL",
-      "Flair Artineering"
+      "GLSL",
+      "Flair (Artineering)"
     ],
     "links": {
-      "github": "https://github.com/",
+      "github": "https://github.com/Alitcher/UE5ShaderIntegration",
       "demo": ""
     },
     "featured": true,
+    "screenshot": "./assets/screenshots/flair-ue5-thesis.jpg",
     "thumbTheme": "dragon",
     "thumbLabel": "&#128009; GL"
   },
