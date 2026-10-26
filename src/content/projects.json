@@ -143,7 +143,7 @@
       "github": "",
       "demo": ""
     },
-    "featured": false,
+    "featured": true,
     "screenshot": "./assets/screenshots/occupational-therapy.jpg",
     "thumbTheme": "factory",
     "thumbLabel": "VR"
