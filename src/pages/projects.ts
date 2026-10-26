@@ -22,7 +22,7 @@ export async function projectsPage(): Promise<Node> {
   const grid = el("div", { class: "projects-grid wide" });
   const renderGrid = (category: ProjectCategory | "all") => {
     clear(grid);
-    const shown = category === "all" ? projects : projects.filter((p) => p.category === category);
+    const shown = category === "all" ? projects : projects.filter((p) => p.category === category || p.alsoIn?.includes(category));
     if (shown.length === 0) {
       grid.appendChild(el("p", {}, "No projects in this category yet."));
       return;
@@ -73,19 +73,27 @@ export async function projectDetailPage(slug: string): Promise<Node> {
     );
   }
 
-  // Projects with a live site get a real screenshot inside a retro browser
-  // window as the hero; the rest keep the pixel-art placeholder tile plus a
+  // Projects with a live site get their screenshot inside a retro browser
+  // window as the hero; a screenshot without a site (e.g. a desktop app) is
+  // shown on its own; the rest keep the pixel-art placeholder tile plus a
   // separate Screenshots section.
   const pixelHero = el("div", { class: `detail-hero thumb-${project.thumbTheme}`, html: project.thumbLabel });
-  const parts: Node[] = [
-    backLink("#/projects", "Back to Projects"),
-    project.screenshot
-      ? browserWindow(project.links.demo ?? "", project.screenshot, {
-          title: project.title,
-          fallback: pixelHero,
-        })
-      : pixelHero,
-  ];
+  let hero: Node = pixelHero;
+  if (project.screenshot && project.links.demo) {
+    hero = browserWindow(project.links.demo, project.screenshot, {
+      title: project.title,
+      fallback: pixelHero,
+    });
+  } else if (project.screenshot) {
+    const img = el("img", {
+      class: "detail-shot sunken",
+      src: project.screenshot,
+      alt: `${project.title} screenshot`,
+    });
+    img.addEventListener("error", () => img.replaceWith(pixelHero));
+    hero = img;
+  }
+  const parts: Node[] = [backLink("#/projects", "Back to Projects"), hero];
 
   if (project.body) {
     // Rich Markdown write-up authored in content/projects/<slug>.md. It carries

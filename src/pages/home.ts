@@ -28,6 +28,7 @@ export async function homePage(): Promise<Node> {
   const projectsWindow = windowEl(
     { title: ":: FEATURED PROJECTS ::", controls: closeOnly() },
     el("div", { class: "projects-grid" }, ...featured.map((p) => projectCard(p, { variant: "compact" }))),
+    el("a", { class: "more-posts", href: "#/projects" }, "See more >>"),
   );
 
   const assistant = windowEl(
@@ -55,7 +56,7 @@ export async function homePage(): Promise<Node> {
         ),
       ),
     ),
-    el("a", { class: "more-posts", href: "#/blog", html: "&raquo; More posts..." }),
+    el("a", { class: "more-posts", href: "#/blog" }, "See more >>"),
   );
 
   const techWindow = windowEl(

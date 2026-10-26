@@ -6,7 +6,9 @@ import { api } from "../services/api.js";
 
 /** Backend development focus page. */
 export async function backendPage(): Promise<Node> {
-  const projects = (await api.getProjects()).filter((p) => p.category === "backend");
+  const projects = (await api.getProjects()).filter(
+    (p) => p.category === "backend" || p.alsoIn?.includes("backend"),
+  );
 
   const win = windowEl(
     { title: ":: BACKEND DEVELOPMENT ::", controls: [] },

@@ -62,6 +62,14 @@
   padding-bottom: 3px;
   margin-bottom: 8px;
 }
+/* Screenshot hero for projects without a live site (no browser frame). */
+.detail-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 14px;
+}
+
 .screenshot-row {
   display: flex;
   gap: 12px;

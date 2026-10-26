@@ -17,6 +17,8 @@ export interface Project {
   readonly slug: string;
   readonly title: string;
   readonly category: ProjectCategory;
+  /** Extra focus pages / filters this project also shows up in. */
+  readonly alsoIn?: readonly ProjectCategory[];
   /** Short one-liner used on cards. */
   readonly summary: string;
   /** Plain-text overview used by cards, search and the assistant. */

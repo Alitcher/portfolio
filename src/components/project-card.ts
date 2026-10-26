@@ -25,8 +25,6 @@ export function projectCard(project: Project, options: ProjectCardOptions = {}):
     );
   }
 
-  children.push(el("a", { class: "details", href: detailRoute, html: "Details &raquo;" }));
-
   return el("div", { class: "project-card" }, ...children);
 }
 
