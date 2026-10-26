@@ -1,39 +1,51 @@
 [
   {
     "slug": "cosplay-event-map",
-    "title": "CosoraAtlas",
+    "title": "CosOverHere",
     "category": "gis",
-    "summary": "Web map for anime & cosplay events across the Nordics & Baltics.",
-    "overview": "This is my first solo web project showcasing my coding skills! <br><br>CosoraAtlas is an interactive web map that aggregates anime, manga and cosplay events across the Nordic and Baltic region. Users filter by date, category and country, and event organisers submit new entries through a moderated pipeline.",
+    "alsoIn": ["backend"],
+    "summary": "Full-stack map and calendar for cosplay events and spots across the Nordics & Baltics.",
+    "overview": "CosOverHere (formerly CosoraAtlas) is my first solo full-stack web project. It gathers cosplay events, cosplay-friendly places and performance practice spots across the Nordic and Baltic countries on one map and calendar, with localization support. The backend imports events from open data sources. Visitors can also submit through the form, selectively approved by admins.",
     "tech": [
       "TypeScript",
       "Next.js",
       "React",
       "MapLibre GL",
+      "next-intl",
       "Hono",
+      "Zod",
       "Cloudflare Workers",
-      "Cloudflare D1"
+      "Cloudflare D1",
+      "WebAuthn",
+      "Vercel",
+      "Claude Opus 5.5"
     ],
     "links": {
       "github": "https://github.com/Alitcher/CosGisClient",
-      "demo": "https://cosoraatlas.vercel.app/"
+      "demo": "https://www.cosoverhere.com/"
     },
     "featured": true,
     "thumbTheme": "map",
-    "thumbLabel": "&#128205; MAP",
-    "screenshot": "./assets/screenshots/cosoraatlas.png"
+    "thumbLabel": "MAP",
+    "screenshot": "./assets/screenshots/cosoverhere-map.jpg"
   },
   {
     "slug": "opengl-renderer",
-    "title": "OpenGL Renderer",
+    "title": "Escape Room Engine",
     "category": "graphics",
-    "summary": "Personal rendering engine in C++ & OpenGL. Deferred shading, PBR.",
-    "overview": "[WIP] A ground-up rendering engine written in modern C++ and OpenGL. It implements a deferred pipeline with physically based shading, shadow mapping, SSAO and bloom, and doubles as a testbed for graphics techniques.",
+    "summary": "C++ & OpenGL engine for building and playing 3D escape rooms, with a level editor.",
+    "overview": "[WIP] A 3D game engine written from scratch in modern C++ and OpenGL. It is a small escape-room creation platform: you build a room in the built-in level editor, it is saved as a JSON file, and the engine loads and plays any room. The sample level is a cosplay convention green room you have to escape from.",
     "tech": [
-      "C++",
-      "OpenGL",
+      "C++17",
+      "OpenGL 4.6",
       "GLSL",
-      "GLFW"
+      "GLFW",
+      "GLM",
+      "Dear ImGui",
+      "ImGuizmo",
+      "nlohmann/json",
+      "CMake",
+      "vcpkg"
     ],
     "links": {
       "github": "https://github.com/",
@@ -41,7 +53,8 @@
     },
     "featured": true,
     "thumbTheme": "dragon",
-    "thumbLabel": "&#128009; GL"
+    "thumbLabel": "&#128009; GL",
+    "screenshot": "./assets/screenshots/escape-room-engine.png"
   },
   {
     "slug": "flair-ue5-thesis",

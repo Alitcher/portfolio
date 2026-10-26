@@ -96,30 +96,32 @@
   ],
   "projects": [
     {
-      "title": "CosoraAtlas",
+      "title": "CosOverHere (formerly CosoraAtlas)",
       "technologies": [
         "Next.js 16 / React 19",
         "TypeScript",
         "MapLibre GL",
+        "Hono + Zod",
         "Cloudflare Workers + D1",
-        "Kartta Helsinki (GIS)"
+        "next-intl",
+        "WebAuthn (passkeys)"
       ],
       "points": [
-        "Build an interactive GIS web app that maps anime conventions and cosplay-friendly venues.",
-        "Render a 3D vector map with MapLibre GL.",
-        "Filter venues by city, click to fly to a location, and zoom in for detail cards.",
-        "Implement a navigable event calendar, a light/dark theme, and",
-        "Implement an admin dashboard for creating, editing, and deleting events.",
-        "Design the app to run standalone with sample data, then wire it to the backend.",
-        "Architect as a monorepo of independently deployable Cloudflare Workers microservices.",
-        "Build REST APIs with Hono, backed by a SQLite (D1), covering full CRUD.",
-        "Defined a shared, schema-validated data contract (with Zod) to keep services consistent.",
-        "Create a proxy service that gets and caches official geometry from external mapping services."
+        "Built and launched a full-stack web app that maps cosplay events, cosplay-friendly places and practice spots across the Nordic and Baltic countries.",
+        "Rendered a 3D vector map with MapLibre GL, linked to an event calendar, event lists and filters by country, city, age and price.",
+        "Localised the whole site into English, Finnish, Estonian and Thai with next-intl.",
+        "Architected the backend as a monorepo of independently deployable Cloudflare Workers, with REST and GeoJSON APIs in Hono backed by Cloudflare D1 (SQLite) and versioned SQL migrations.",
+        "Defined a shared, schema-validated data contract with Zod, used by both server and client.",
+        "Automated daily imports from the Helsinki Linked Events API and conit.fi with a Cloudflare Cron Trigger.",
+        "Added nearest public transport for every venue using Digitransit, Transitous and OpenStreetMap fallbacks.",
+        "Built a passkey-protected admin dashboard to moderate rate-limited visitor submissions, with full edit history.",
+        "Created an edge proxy Worker that fetches and caches official Helsinki venue geometry.",
+        "Made event lists start on the visitor's own country using edge geolocation headers, with no personal data stored."
       ],
       "links": [
         {
           "name": "Visit Website",
-          "url": "https://cosoraatlas.vercel.app/"
+          "url": "https://www.cosoverhere.com/"
         }
       ]
     },
