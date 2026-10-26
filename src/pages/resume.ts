@@ -19,7 +19,7 @@ export async function resumePage(): Promise<Node> {
     { title: ":: RESUME ::", className: "blue-titlebar", controls: [] },
     el("div", { class: "resume-head" },
       el("div", {}, el("h3", {}, config.siteOwner),
-        el("p", { class: "muted" }, "Unity XR Developer · Backend Developer · Computer Graphics")),
+        el("p", { class: "muted" }, "Full Stack Developer | Unity3D | Computer Graphics")),
       downloadBtn,
     ),
 
