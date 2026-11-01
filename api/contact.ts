@@ -11,6 +11,7 @@
  *
  * Set these SERVER env vars in your host's dashboard (never in the client):
  *   CONTACT_BACKEND_URL
+ *   CONTACT_BACKEND_KEY (secret key the backend requires)
  *   UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN
  *     (or KV_REST_API_URL + KV_REST_API_TOKEN)
  * For local dev, put them in `.env.local`.
@@ -59,11 +60,10 @@ export default async function handler(req: Request): Promise<Response> {
 
   let res: Response;
   try {
-    res = await fetch(backendUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body,
-    });
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    // Secret key so the backend only accepts requests from this server.
+    if (env.CONTACT_BACKEND_KEY) headers["x-functions-key"] = env.CONTACT_BACKEND_KEY;
+    res = await fetch(backendUrl, { method: "POST", headers, body });
   } catch {
     return json({ error: "Contact service is unavailable." }, 502);
   }

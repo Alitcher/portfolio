@@ -20,6 +20,7 @@ const SERVER_ENV = [
   "KV_REST_API_URL",
   "KV_REST_API_TOKEN",
   "CONTACT_BACKEND_URL",
+  "CONTACT_BACKEND_KEY",
 ];
 
 function readBody(req: IncomingMessage): Promise<Buffer> {
