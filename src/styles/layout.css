@@ -196,8 +196,9 @@ html.crt-on {
 
 /* ---- Responsive: stack windows, keep the retro look ---- */
 @media (max-width: 1100px) {
+  /* minmax(0, ...) so wide content can't push the column past the screen */
   .layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .layout > main:last-child {
     grid-column: auto;
@@ -236,9 +237,6 @@ html.crt-on {
   .site-title .roles {
     font-size: 15px;
   }
-  .projects-grid {
-    grid-template-columns: 1fr 1fr;
-  }
   .welcome-body,
   .ai-body {
     flex-direction: column;
@@ -248,9 +246,6 @@ html.crt-on {
   }
 }
 @media (max-width: 560px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
   .site-title h1 {
     font-size: 34px;
   }

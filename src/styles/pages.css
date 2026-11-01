@@ -296,6 +296,11 @@
   font-weight: bold;
   min-width: 70px;
 }
+/* Long links (LinkedIn) wrap instead of making the panel wider than a phone */
+.contact-row a {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -337,7 +342,7 @@
   .gfx-grid,
   .skill-groups,
   .contact-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .projects-grid.wide {
     grid-template-columns: 1fr 1fr;
