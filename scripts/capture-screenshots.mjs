@@ -16,7 +16,7 @@ import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 
 const TARGETS = [
-  { url: "https://cosoraatlas.vercel.app/", out: "public/assets/screenshots/cosoraatlas.png" },
+  { url: "https://www.cosoverhere.com/", out: "public/assets/screenshots/cosoraatlas.png" },
 ];
 
 // thum.io render options: wait N seconds for JS to settle, capture a 1280-wide
