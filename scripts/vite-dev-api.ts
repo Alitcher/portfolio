@@ -19,6 +19,7 @@ const SERVER_ENV = [
   "UPSTASH_REDIS_REST_TOKEN",
   "KV_REST_API_URL",
   "KV_REST_API_TOKEN",
+  "CONTACT_BACKEND_URL",
 ];
 
 function readBody(req: IncomingMessage): Promise<Buffer> {

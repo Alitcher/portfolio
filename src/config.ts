@@ -9,6 +9,7 @@
 const rawBase = (import.meta.env.VITE_API_BASE_URL ?? "").trim();
 const rawChat = (import.meta.env.VITE_CHAT_API_URL ?? "").trim();
 const rawCounter = (import.meta.env.VITE_COUNTER_API_URL ?? "").trim();
+const rawContact = (import.meta.env.VITE_CONTACT_API_URL ?? "").trim();
 
 export const config = {
   /** Backend origin, or "" for fully static / mock mode. */
@@ -34,6 +35,11 @@ export const config = {
   get useRemoteCounter(): boolean {
     return this.counterApiUrl.length > 0;
   },
+  /**
+   * URL of the contact form endpoint (api/contact.ts). Override with
+   * VITE_CONTACT_API_URL if the endpoint lives somewhere else.
+   */
+  contactApiUrl: (rawContact || "/api/contact").replace(/\/+$/, ""),
   siteOwner: "Alicia Pankka",
   contact: {
     email: "alicia.pankka@gmail.com",

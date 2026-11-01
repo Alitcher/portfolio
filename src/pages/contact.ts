@@ -4,17 +4,35 @@ import { button } from "../components/button.js";
 import { pageRegion } from "./shared.js";
 import { config } from "../config.js";
 
-/** Contact page: links plus a simple (client-side) contact form. */
+/**
+ * Contact page: links plus a contact form. The form POSTs to this site's
+ * contact endpoint (config.contactApiUrl, api/contact.ts).
+ */
 export async function contactPage(): Promise<Node> {
   const status = el("p", { class: "form-status", attrs: { role: "status" } });
 
-  const name = field("Name", "text", "contact-name");
-  const email = field("Email", "email", "contact-email");
+  const name = field("Name", "text", "contact-name", 100);
+  const email = field("Email", "email", "contact-email", 254);
   const message = el("textarea", {
     id: "contact-message",
     class: "form-textarea sunken",
-    attrs: { rows: "5", required: "true" },
+    attrs: { rows: "5", required: "true", maxlength: "4000" },
   }) as HTMLTextAreaElement;
+
+  // Honeypot: hidden from people, but bots fill it in. The backend accepts
+  // the request and quietly drops it when this field is not empty.
+  const website = el("input", {
+    type: "text",
+    tabindex: "-1",
+    attrs: { name: "website", autocomplete: "off" },
+  }) as HTMLInputElement;
+  const honeypot = el(
+    "div",
+    { attrs: { "aria-hidden": "true", style: "position:absolute;left:-9999px;" } },
+    el("label", {}, "Website", website),
+  );
+
+  const submit = button({ label: "Send Message", type: "submit" });
 
   const form = el(
     "form",
@@ -23,25 +41,52 @@ export async function contactPage(): Promise<Node> {
     email.wrap,
     el("label", { class: "form-label", attrs: { for: "contact-message" } }, "Message"),
     message,
-    button({ label: "Send Message", type: "submit" }),
+    honeypot,
+    submit,
     status,
   );
 
-  form.addEventListener("submit", (e) => {
+  const setStatus = (text: string, kind: "ok" | "error" | "") => {
+    status.textContent = text;
+    status.className = kind ? `form-status ${kind}` : "form-status";
+  };
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if (!name.input.value.trim() || !email.input.value.trim() || !message.value.trim()) {
-      status.textContent = "Please fill in every field.";
-      status.className = "form-status error";
+    const data = {
+      name: name.input.value.trim(),
+      email: email.input.value.trim(),
+      message: message.value.trim(),
+      website: website.value,
+    };
+    if (!data.name || !data.email || !data.message) {
+      setStatus("Please fill in every field.", "error");
       return;
     }
-    // No backend yet: hand off to the user's mail client (mailto), and clearly
-    // label this as the current behaviour. A POST /api/contact could replace it.
-    const subject = encodeURIComponent(`Portfolio contact from ${name.input.value}`);
-    const body = encodeURIComponent(`${message.value}\n\n— ${name.input.value} (${email.input.value})`);
-    window.location.href = `mailto:${config.contact.email}?subject=${subject}&body=${body}`;
-    status.textContent = "Opening your email client...";
-    status.className = "form-status ok";
-    form.reset();
+
+    submit.disabled = true;
+    setStatus("Sending...", "");
+    try {
+      const res = await fetch(config.contactApiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        setStatus("Thanks, your message was sent. I will get back to you soon.", "ok");
+        form.reset();
+      } else {
+        const err = (await res.json().catch(() => null)) as { error?: string } | null;
+        setStatus(err?.error ?? "Sorry, the message could not be sent. Please try again.", "error");
+      }
+    } catch {
+      setStatus(
+        `Sorry, the message could not be sent. You can email me at ${config.contact.email}.`,
+        "error",
+      );
+    } finally {
+      submit.disabled = false;
+    }
   });
 
   const infoPanel = el(
@@ -62,12 +107,12 @@ export async function contactPage(): Promise<Node> {
   return pageRegion(win);
 }
 
-function field(label: string, type: string, id: string) {
+function field(label: string, type: string, id: string, maxLength: number) {
   const input = el("input", {
     id,
     type,
     class: "form-input sunken",
-    attrs: { required: "true" },
+    attrs: { required: "true", maxlength: String(maxLength) },
   }) as HTMLInputElement;
   const wrap = el("div", { class: "form-row" },
     el("label", { class: "form-label", attrs: { for: id } }, label), input);
