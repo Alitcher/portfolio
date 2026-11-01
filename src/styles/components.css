@@ -148,7 +148,7 @@
   }
 }
 .project-card .thumb {
-  height: 110px;
+  aspect-ratio: 16 / 9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -158,10 +158,6 @@
   letter-spacing: 2px;
   text-shadow: 1px 1px 0 #000;
   image-rendering: pixelated;
-}
-.projects-grid.wide .project-card .thumb {
-  height: auto;
-  aspect-ratio: 16 / 9;
 }
 .project-card .thumb-shot {
   width: 100%;
