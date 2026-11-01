@@ -75,9 +75,9 @@
       "org": "Artineering",
       "period": "Mar 2024 - May 2024",
       "points": [
-        "Prototype the new version in C++ UE5, focusing on making stylised HLSL shaders.",
+        "Prototype the new version in C++ UE5, focusing on stylised HLSL shaders.",
         "Work closely with the team lead to adapt the original Flair tools to be compatible with UE5.",
-        "Implement documentation to assist team members in understanding the current architecture and utilizing the new tools effectively."
+        "Write documentation for the team members to understand the architecture and utilize the new tools effectively."
       ]
     },
     {
@@ -87,14 +87,38 @@
       "points": [
         "Develop Dockerfiles to containerize LizardFS services for development and test environments.",
         "Automate the Debian build packages pipeline and deployment workflows using Bash scripting.",
-        "Engaging in the DevOps process, working with tools like Docker and integration tests.",
+        "Facilitate the DevOps process, working with tools like Docker and integration tests.",
         "Contribute to client-server interactions by working with RPC and user session management.",
-        "Manage user sessions on the admin side and communicate with the server using LizardFs RPC.",
+        "Manage user sessions on the admin side and communicate with the server using LizardFS RPC.",
         "Explore its chunk server and modified source code within a distributed filesystem codebase."
       ]
     }
   ],
   "projects": [
+    {
+      "title": "Portfolio Contact Backend",
+      "technologies": [
+        "C# / .NET 10",
+        "Azure Functions",
+        "Azure Storage Queues",
+        "Azure SQL",
+        "Application Insights",
+        "Vercel Edge"
+      ],
+      "points": [
+        "Built an event-driven contact pipeline: HTTP-triggered Azure Function -> Storage Queue -> queue-triggered function -> Azure SQL.",
+        "Made processing reliable and idempotent: message ID created before queueing, duplicate-safe inserts, automatic retries and a poison queue.",
+        "Added email notifications over SMTP, with reply-to set to the sender.",
+        "Secured the endpoint: key-protected function behind an edge proxy, server-side rate limiting (Redis), honeypot spam filter and input validation.",
+        "Deployed and configured with Azure CLI and Functions Core Tools; monitored with Application Insights."
+      ],
+      "links": [
+        {
+          "name": "Source",
+          "url": "https://github.com/Alitcher/portfolio-contact-func"
+        }
+      ]
+    },
     {
       "title": "CosOverHere (formerly CosoraAtlas)",
       "technologies": [
@@ -206,7 +230,7 @@
         "Firebase",
         "Mobile game development (Android)",
         "Addressable assets",
-        "Dotween",
+        "DOTween",
         "Convai",
         "Animation pipelines"
       ]
@@ -221,26 +245,29 @@
         "REST API design",
         "async services",
         "Data processing",
-        "ETL logic"
+        "ETL logic",
+        "C# / .NET (Azure)"
       ]
     },
     {
       "name": "Mobile / Platform (Familiarity)",
       "items": [
-        "Android fundamentals",
-        "Mobile SDK concepts"
+        "Mobile SDK",
+        "E2E test"
       ]
     },
     {
       "name": "Databases",
       "items": [
-        "Relational DB: PostgreSQL and MySQL"
+        "Relational DB: PostgreSQL, MySQL",
+        "Azure SQL (SQL Server)"
       ]
     },
     {
       "name": "Frontend",
       "items": [
         "React / TypeScript",
+        "Next.js / Node.js",
         "Component-based UI architecture",
         "state management",
         "API-driven UIs"
@@ -255,7 +282,7 @@
         "Linux environments(Ubuntu)",
         "CI/CD: GitHub Actions",
         "GitLab CI",
-        "Basic AWS knowledge (S3, EC2, Lambda concepts)"
+        "Azure: Functions, Storage Queues, Azure SQL, Azure CLI"
       ]
     }
   ],
